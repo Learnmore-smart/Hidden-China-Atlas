@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 globalThis.__BUILD_MANIFEST = {
   "pages": {
     "/_app": []
@@ -18,3 +19,23 @@ globalThis.__BUILD_MANIFEST = {
     "static/chunks/turbopack-12x12d5f7z3b1.js"
   ]
 };
+=======
+self.__BUILD_MANIFEST = {
+  "polyfillFiles": [
+    "static/chunks/polyfills.js"
+  ],
+  "devFiles": [],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [],
+  "pages": {
+    "/_app": []
+  },
+  "ampFirstPages": []
+};
+self.__BUILD_MANIFEST.lowPriorityFiles = [
+"/static/" + process.env.__NEXT_BUILD_ID + "/_buildManifest.js",
+,"/static/" + process.env.__NEXT_BUILD_ID + "/_ssgManifest.js",
+
+];
+>>>>>>> dedee4ff937b920093932c772c6519876d96551b
