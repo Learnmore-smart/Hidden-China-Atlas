@@ -8,13 +8,13 @@ const LanguageSwitcher: React.FC = () => {
     <div className="flex items-center gap-2">
       <button
         onClick={() => setLanguage('en')}
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${language === 'en' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${language === 'en' ? 'bg-white text-primary shadow-md' : 'bg-transparent text-white/80 hover:bg-white/10'}`}
       >
         English
       </button>
       <button
         onClick={() => setLanguage('zh')}
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${language === 'zh' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${language === 'zh' ? 'bg-white text-primary shadow-md' : 'bg-transparent text-white/80 hover:bg-white/10'}`}
       >
         中文
       </button>

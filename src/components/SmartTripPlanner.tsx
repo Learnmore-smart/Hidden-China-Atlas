@@ -125,102 +125,125 @@ const SmartTripPlanner: React.FC = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-gray-50 rounded-xl p-8 shadow-sm">
+    <div className="max-w-3xl mx-auto bg-gray-50 rounded-2xl p-10 shadow-elegant">
       <form 
-        className="space-y-6"
+        className="space-y-8"
         onSubmit={(e) => {
           e.preventDefault();
           generateTripPlans();
         }}
       >
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">{t('tripPlanner.departureCity')}</label>
+        <div className="space-y-4">
+          <label className="block text-sm font-medium text-muted">{t('tripPlanner.departureCity')}</label>
           <input 
             type="text" 
             name="departureCity"
             value={formData.departureCity}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" 
+            className="w-full px-6 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 bg-white hover:border-gray-300" 
             placeholder="e.g., Beijing" 
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">{t('tripPlanner.numberOfDays')}</label>
+        <div className="space-y-4">
+          <label className="block text-sm font-medium text-muted">{t('tripPlanner.numberOfDays')}</label>
           <input 
             type="number" 
             name="numberOfDays"
             value={formData.numberOfDays}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" 
+            className="w-full px-6 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 bg-white hover:border-gray-300" 
             placeholder="e.g., 5" 
             min="1"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">{t('tripPlanner.interests')}</label>
+        <div className="space-y-4">
+          <label className="block text-sm font-medium text-muted">{t('tripPlanner.interests')}</label>
           <input 
             type="text" 
             name="interests"
             value={formData.interests}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" 
+            className="w-full px-6 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 bg-white hover:border-gray-300" 
             placeholder="e.g., nature, culture, food" 
           />
         </div>
-        <div>
-          <label className="flex items-center">
+        <div className="pt-4">
+          <label className="flex items-center space-x-3 cursor-pointer">
             <input 
               type="checkbox" 
               name="avoidCrowds"
               checked={formData.avoidCrowds}
               onChange={handleChange}
-              className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" 
+              className="h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded transition-all duration-300"
             />
-            <span className="ml-2 block text-sm text-gray-700">{t('tripPlanner.avoidCrowds')}</span>
+            <span className="block text-sm font-medium text-muted">{t('tripPlanner.avoidCrowds')}</span>
           </label>
         </div>
         <button 
           type="submit" 
-          className="w-full bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-lg font-medium transition-all"
+          className="w-full bg-primary hover:bg-primary/90 text-white px-6 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg"
           disabled={isLoading}
         >
-          {isLoading ? 'Generating...' : t('tripPlanner.generatePlan')}
+          {isLoading ? (
+            <div className="flex items-center justify-center gap-2">
+              <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Generating...
+            </div>
+          ) : (
+            t('tripPlanner.generatePlan')
+          )}
         </button>
       </form>
 
       {/* Trip Plan Results */}
       {tripPlans.length > 0 && (
-        <div className="mt-12 space-y-8">
-          <h3 className="text-2xl font-semibold mb-6">Your Trip Recommendations</h3>
+        <div className="mt-16 space-y-10">
+          <h3 className="text-2xl font-semibold mb-8 text-center">Your Trip Recommendations</h3>
           {tripPlans.map((plan, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-start gap-6">
-                <div className="md:w-1/3">
-                  <img 
-                    src={plan.destination.imageUrl} 
-                    alt={plan.destination.name}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
+            <div key={index} className="bg-white p-8 rounded-2xl shadow-elegant hover:shadow-hover transition-all duration-500 transform hover:-translate-y-2">
+              <div className="flex flex-col md:flex-row md:items-start gap-8">
+                <div className="md:w-2/5">
+                  <div className="relative rounded-xl overflow-hidden aspect-[4/3]">
+                    <img 
+                      src={plan.destination.imageUrl} 
+                      alt={plan.destination.name}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary">
+                      {plan.destination.tagline}
+                    </div>
+                  </div>
                 </div>
-                <div className="md:w-2/3">
-                  <h4 className="text-xl font-semibold mb-2">{plan.destination.name}</h4>
-                  <p className="text-gray-500 mb-4">{plan.destination.province}</p>
-                  <p className="text-gray-700 mb-4">{plan.reason}</p>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <span className="text-sm text-gray-600">Suggested Season:</span>
+                <div className="md:w-3/5">
+                  <div className="flex justify-between items-start mb-4">
+                    <h4 className="text-2xl font-semibold text-primary">{plan.destination.name}</h4>
+                    <span className="text-sm text-muted font-medium">{plan.destination.chineseName}</span>
+                  </div>
+                  <p className="text-muted mb-6">{plan.destination.province}</p>
+                  <p className="text-secondary mb-6 leading-relaxed">{plan.reason}</p>
+                  <div className="grid grid-cols-2 gap-6 mb-6">
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <span className="block text-xs text-muted mb-2">Suggested Season</span>
                       <p className="font-medium">{plan.suggestedSeason}</p>
                     </div>
-                    <div>
-                      <span className="text-sm text-gray-600">Recommended Duration:</span>
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <span className="block text-xs text-muted mb-2">Recommended Duration</span>
                       <p className="font-medium">{plan.recommendedDuration}</p>
                     </div>
                   </div>
-                  <div>
-                    <h5 className="text-sm font-medium text-gray-700 mb-2">Suggested Itinerary:</h5>
-                    <ul className="list-disc list-inside space-y-1 text-gray-700">
+                  <div className="bg-gray-50 p-6 rounded-lg">
+                    <h5 className="text-sm font-medium text-primary mb-4">Suggested Itinerary:</h5>
+                    <ul className="space-y-3">
                       {plan.itinerary.map((item, i) => (
-                        <li key={i}>{item}</li>
+                        <li key={i} className="flex items-start gap-3">
+                          <span className="flex-shrink-0 w-6 h-6 bg-primary/10 text-primary rounded-full flex items-center justify-center text-xs font-medium mt-0.5">
+                            {i + 1}
+                          </span>
+                          <span className="text-secondary">{item}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>

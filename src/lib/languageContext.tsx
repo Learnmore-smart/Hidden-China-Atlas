@@ -26,36 +26,36 @@ export const useTranslation = () => {
 const translations = {
   en: {
     hero: {
-      title: "Discover the side of China most tourists never see",
-      subtitle: "Explore hidden gems, lesser-known destinations, and local beauty beyond the usual route",
+      title: "Discover the China Most Travelers Never Experience",
+      subtitle: "Unearth hidden gems, lesser-known destinations, and authentic local beauty beyond the typical tourist path",
       exploreMap: "Explore the Map",
-      planTrip: "Plan My Trip"
+      planTrip: "Plan Your Journey"
     },
     map: {
-      title: "Explore the Map"
+      title: "Interactive Discovery Map"
     },
     hiddenPicks: {
-      title: "Hidden Picks"
+      title: "Curated Hidden Gems"
     },
     tripPlanner: {
-      title: "Plan My Trip",
+      title: "Tailored Trip Planning",
       departureCity: "Departure City",
-      numberOfDays: "Number of Days",
-      interests: "Interests",
-      avoidCrowds: "Avoid crowds",
-      generatePlan: "Generate Trip Plan"
+      numberOfDays: "Travel Duration",
+      interests: "Travel Interests",
+      avoidCrowds: "Avoid Crowded Areas",
+      generatePlan: "Craft Your Itinerary"
     },
     why: {
-      title: "Why Hidden China Atlas",
-      discover: "Discover Hidden Gems",
-      discoverDesc: "Find destinations beyond the usual tourist spots",
-      map: "Interactive Map",
-      mapDesc: "Explore China with our user-friendly map interface",
-      planner: "Smart Trip Planner",
-      plannerDesc: "Get personalized recommendations based on your preferences"
+      title: "Why Choose Hidden China Atlas",
+      discover: "Curated Hidden Treasures",
+      discoverDesc: "Uncover extraordinary destinations beyond the typical tourist circuit",
+      map: "Interactive Exploration Map",
+      mapDesc: "Navigate China's diverse landscapes with our intuitive map interface",
+      planner: "Intelligent Trip Curator",
+      plannerDesc: "Receive personalized recommendations tailored to your unique travel preferences"
     },
     footer: {
-      about: "About",
+      about: "About Us",
       destinations: "Destinations",
       contact: "Contact",
       copyright: "All rights reserved."
@@ -64,17 +64,17 @@ const translations = {
       pingtan: {
         name: "Pingtan Island",
         province: "Fujian Province",
-        description: "A coastal gem with pristine beaches and unique stone houses"
+        description: "A coastal sanctuary boasting pristine beaches and distinctive stone dwellings"
       },
       gannan: {
         name: "Gannan Tibetan Autonomous Prefecture",
         province: "Gansu Province",
-        description: "Scenic grasslands and Tibetan culture in northwestern China"
+        description: "Breathtaking grasslands and rich Tibetan cultural heritage in northwestern China"
       },
       hongcun: {
         name: "Hongcun Village",
         province: "Anhui Province",
-        description: "An ancient village with traditional Hui-style architecture"
+        description: "An ancient village showcasing exquisite traditional Hui-style architecture"
       }
     }
   },
