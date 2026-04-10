@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 
 // 地图标记数据
