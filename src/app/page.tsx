@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import ChinaMap from '@/components/ChinaMap'

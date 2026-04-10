@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { destinations, Destination } from '@/data/destinations';
 import { useTranslation } from '@/lib/languageContext';
