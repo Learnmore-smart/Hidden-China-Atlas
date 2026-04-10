@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Destination } from '@/data/destinations';
 
 interface DestinationCardProps {
@@ -8,11 +9,12 @@ interface DestinationCardProps {
 const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
   return (
     <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-      <div className="h-56 overflow-hidden">
-        <img 
+      <div className="h-56 overflow-hidden relative">
+        <Image 
           src={destination.imageUrl} 
           alt={destination.name}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          fill
+          className="object-cover transition-transform duration-500 hover:scale-110"
         />
       </div>
       <div className="p-6">

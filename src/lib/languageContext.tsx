@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 // 语言类型定义
@@ -143,19 +145,19 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   const [language, setLanguage] = useState<Language>('en');
 
   // 翻译函数
-  const t = (key: string) => {
+  const t = (key: string): string => {
     const keys = key.split('.');
-    let result: any = translations[language];
+    let result: unknown = translations[language];
     
     for (const k of keys) {
-      if (result && result[k] !== undefined) {
-        result = result[k];
+      if (result && typeof result === 'object' && k in result) {
+        result = (result as Record<string, unknown>)[k];
       } else {
-        return key; // 如果找不到翻译，返回原始键
+        return key;
       }
     }
     
-    return result;
+    return typeof result === 'string' ? result : key;
   };
 
   return (

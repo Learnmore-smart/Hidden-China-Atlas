@@ -1,4 +1,7 @@
+"use client";
+
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { destinations, Destination } from '@/data/destinations';
 import { useTranslation } from '@/lib/languageContext';
 
@@ -74,7 +77,7 @@ const SmartTripPlanner: React.FC = () => {
         reason: generateReason(destination, interestTags),
         suggestedSeason: destination.bestSeason,
         recommendedDuration: destination.idealTripLength,
-        itinerary: generateItinerary(destination, parseInt(destination.idealTripLength))
+        itinerary: generateItinerary(destination),
       }));
 
       setTripPlans(plans);
@@ -92,7 +95,7 @@ const SmartTripPlanner: React.FC = () => {
     return reasons[Math.floor(Math.random() * reasons.length)];
   };
 
-  const generateItinerary = (destination: Destination, days: number): string[] => {
+  const generateItinerary = (destination: Destination): string[] => {
     const itineraries = {
       '1-2 days': [
         `Day 1: Explore the main attractions of ${destination.name}`,
@@ -195,11 +198,12 @@ const SmartTripPlanner: React.FC = () => {
           {tripPlans.map((plan, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex flex-col md:flex-row md:items-start gap-6">
-                <div className="md:w-1/3">
-                  <img 
+                <div className="md:w-1/3 relative h-48">
+                  <Image 
                     src={plan.destination.imageUrl} 
                     alt={plan.destination.name}
-                    className="w-full h-48 object-cover rounded-lg"
+                    fill
+                    className="object-cover rounded-lg"
                   />
                 </div>
                 <div className="md:w-2/3">
