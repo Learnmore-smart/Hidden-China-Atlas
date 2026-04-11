@@ -1,198 +1,168 @@
 export interface Destination {
   id: string;
-  name: string;
-  chineseName: string;
+  nameEn: string;
+  nameZh: string;
   province: string;
   tagline: string;
-  whySpecial: string;
-  bestSeason: string;
-  idealTripLength: string;
-  vibeTags: string[];
-  crowdLevel: string;
-  howToGetThere: string;
   description: string;
-  imageUrl: string;
+  bestSeason: string[];
+  tripLength: string;
+  vibes: string[];
+  crowdLevel: 'Low' | 'Medium' | 'High';
+  gettingThere: string;
+  coordinates: { x: number; y: number };
+  image: string;
 }
 
 export const destinations: Destination[] = [
   {
-    id: 'pingtan',
-    name: 'Pingtan Island',
-    chineseName: '平潭岛',
-    province: 'Fujian Province',
-    tagline: 'The Taiwan Strait Pearl',
-    whySpecial: 'Known for its pristine beaches, unique stone houses, and the closest point to Taiwan mainland',
-    bestSeason: 'Spring (April-June) and Autumn (September-November)',
-    idealTripLength: '2-3 days',
-    vibeTags: ['coastal', 'relaxation', 'photography', 'seafood'],
-    crowdLevel: 'Low to Medium',
-    howToGetThere: 'Take a high-speed train from Fuzhou to Pingtan, then local transport to the island',
-    description: 'A coastal gem with crystal-clear waters, white sandy beaches, and traditional stone houses. Perfect for a relaxing getaway away from the crowds.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Pingtan%20Island%20coastal%20scenery%20with%20traditional%20stone%20houses%20and%20clear%20blue%20waters&image_size=landscape_16_9'
+    id: 'kanas',
+    nameEn: 'Kanas',
+    nameZh: '喀纳斯',
+    province: 'Xinjiang',
+    tagline: 'The palette of the gods.',
+    description: 'An alpine lake hidden deep in the Altai Mountains, famous for its changing colors and pristine Siberian taiga forests. It feels more like Switzerland than typical China.',
+    bestSeason: ['Autumn', 'Summer'],
+    tripLength: '3-5 days',
+    vibes: ['mountains', 'photography', 'nature'],
+    crowdLevel: 'Medium',
+    gettingThere: 'Fly to Altay Airport or Burqin Kanas Airport, then take a scenic bus ride into the nature reserve.',
+    coordinates: { x: 25, y: 15 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Stunning%20alpine%20lake%20surrounded%20by%20golden%20autumn%20forests%20and%20snow-capped%20mountains,%20cinematic%20lighting,%20National%20Geographic%20style&image_size=landscape_16_9'
   },
   {
-    id: 'gannan',
-    name: 'Gannan Tibetan Autonomous Prefecture',
-    chineseName: '甘南藏族自治州',
-    province: 'Gansu Province',
-    tagline: 'Tibetan Plateau Gateway',
-    whySpecial: 'Stunning grasslands, Tibetan monasteries, and unique ethnic culture without the crowds of Tibet',
-    bestSeason: 'Summer (June-August)',
-    idealTripLength: '4-5 days',
-    vibeTags: ['mountains', 'culture', 'photography', 'spiritual'],
+    id: 'yubeng',
+    nameEn: 'Yubeng Village',
+    nameZh: '雨崩村',
+    province: 'Yunnan',
+    tagline: 'A sacred Tibetan sanctuary.',
+    description: 'Accessible only by foot or mule, this remote Tibetan village sits at the foot of the Meili Snow Mountain. It is the ultimate destination for slow travel and spiritual trekking.',
+    bestSeason: ['Spring', 'Autumn'],
+    tripLength: '4-6 days',
+    vibes: ['mountains', 'slow travel', 'quiet'],
     crowdLevel: 'Low',
-    howToGetThere: 'Fly to Lanzhou, then take a bus or drive to Xiahe',
-    description: 'Scenic grasslands, Tibetan monasteries, and nomadic culture in northwestern China. A hidden paradise for nature and culture lovers.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Gannan%20Tibetan%20Autonomous%20Prefecture%20grasslands%20with%20Tibetan%20monastery%20and%20yaks&image_size=landscape_16_9'
+    gettingThere: 'Fly to Shangri-La (Diqing), drive to Feilaisi, and hike or take an off-road vehicle into the village.',
+    coordinates: { x: 45, y: 65 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Remote%20Tibetan%20village%20in%20a%20lush%20green%20valley%20under%20massive%20snow%20peaks,%20misty%20morning,%20peaceful,%20cinematic&image_size=landscape_16_9'
+  },
+  {
+    id: 'xiapu',
+    nameEn: 'Xiapu Mudflats',
+    nameZh: '霞浦滩涂',
+    province: 'Fujian',
+    tagline: 'A living ink painting.',
+    description: 'The largest mudflats in China, where bamboo poles, fishing nets, and changing tides create mesmerizing geometric patterns that photographers dream of.',
+    bestSeason: ['Spring', 'Autumn'],
+    tripLength: '2-3 days',
+    vibes: ['coastal', 'photography', 'quiet'],
+    crowdLevel: 'Low',
+    gettingThere: 'High-speed train directly to Xiapu Station, then hire a local driver to explore the coastal villages.',
+    coordinates: { x: 85, y: 65 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Vast%20ocean%20mudflats%20at%20sunset%20with%20bamboo%20poles%20and%20fishing%20nets%20creating%20geometric%20patterns,%20golden%20hour,%20drone%20shot&image_size=landscape_16_9'
   },
   {
     id: 'hongcun',
-    name: 'Hongcun Village',
-    chineseName: '宏村',
-    province: 'Anhui Province',
-    tagline: 'Ancient Water Village',
-    whySpecial: 'A UNESCO World Heritage site with well-preserved Hui-style architecture and a unique water system',
-    bestSeason: 'Spring (March-April) and Autumn (October-November)',
-    idealTripLength: '1-2 days',
-    vibeTags: ['heritage', 'culture', 'photography', 'history'],
-    crowdLevel: 'Medium to High',
-    howToGetThere: 'Take a bus from Huangshan City to Hongcun',
-    description: 'An ancient village with traditional Hui-style architecture, narrow stone lanes, and a unique water system. Known as the "Village in Chinese Painting".',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Hongcun%20Village%20ancient%20Chinese%20water%20village%20with%20traditional%20Hui-style%20architecture&image_size=landscape_16_9'
-  },
-  {
-    id: 'zhoushan',
-    name: 'Zhoushan Islands',
-    chineseName: '舟山群岛',
-    province: 'Zhejiang Province',
-    tagline: 'East China Sea Archipelago',
-    whySpecial: 'A group of islands with pristine beaches, fresh seafood, and unique fishing villages',
-    bestSeason: 'Summer (June-September)',
-    idealTripLength: '3-4 days',
-    vibeTags: ['coastal', 'relaxation', 'seafood', 'islands'],
-    crowdLevel: 'Medium',
-    howToGetThere: 'Take a ferry from Ningbo or Shanghai to Zhoushan',
-    description: 'A beautiful archipelago with clear waters, sandy beaches, and fresh seafood. Perfect for a coastal escape.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Zhoushan%20Islands%20coastal%20scenery%20with%20fishing%20boats%20and%20clear%20blue%20waters&image_size=landscape_16_9'
-  },
-  {
-    id: 'lijiang',
-    name: 'Lijiang Ancient Town',
-    chineseName: '丽江古城',
-    province: 'Yunnan Province',
-    tagline: 'Naxi Ethnic Treasure',
-    whySpecial: 'A UNESCO World Heritage site with well-preserved Naxi ethnic culture and architecture',
-    bestSeason: 'Spring (March-May) and Autumn (September-November)',
-    idealTripLength: '2-3 days',
-    vibeTags: ['heritage', 'culture', 'photography', 'history'],
+    nameEn: 'Hongcun',
+    nameZh: '宏村',
+    province: 'Anhui',
+    tagline: 'Crouching tiger, hidden village.',
+    description: 'A 900-year-old village shaped like an ox, featuring iconic whitewashed walls, dark tiles, and tranquil reflecting pools. Featured in the film "Crouching Tiger, Hidden Dragon".',
+    bestSeason: ['Spring', 'Autumn'],
+    tripLength: '2 days',
+    vibes: ['heritage', 'photography', 'slow travel'],
     crowdLevel: 'High',
-    howToGetThere: 'Fly to Lijiang Airport, then take a taxi to the ancient town',
-    description: 'A well-preserved ancient town with Naxi ethnic culture, traditional architecture, and scenic surroundings. A popular but still charming destination.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Lijiang%20Ancient%20Town%20with%20traditional%20Naxi%20architecture%20and%20cobblestone%20streets&image_size=landscape_16_9'
-  },
-  {
-    id: 'hulunbuir',
-    name: 'Hulunbuir Grassland',
-    chineseName: '呼伦贝尔草原',
-    province: 'Inner Mongolia Autonomous Region',
-    tagline: 'Mongolian Nomadic Paradise',
-    whySpecial: 'Vast grasslands with traditional Mongolian nomadic culture and stunning natural scenery',
-    bestSeason: 'Summer (June-August)',
-    idealTripLength: '4-5 days',
-    vibeTags: ['mountains', 'culture', 'photography', 'nature'],
-    crowdLevel: 'Low to Medium',
-    howToGetThere: 'Fly to Hailar Airport, then rent a car or join a tour',
-    description: 'Vast grasslands with Mongolian nomadic culture, yurts, and stunning natural scenery. A perfect place to experience traditional Mongolian life.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Hulunbuir%20Grassland%20vast%20green%20pasture%20with%20Mongolian%20yurts%20and%20herds%20of%20sheep&image_size=landscape_16_9'
-  },
-  {
-    id: 'xidi',
-    name: 'Xidi Village',
-    chineseName: '西递村',
-    province: 'Anhui Province',
-    tagline: 'Ancient Hui-style Village',
-    whySpecial: 'A UNESCO World Heritage site with well-preserved Hui-style architecture and peaceful atmosphere',
-    bestSeason: 'Spring (March-April) and Autumn (October-November)',
-    idealTripLength: '1-2 days',
-    vibeTags: ['heritage', 'culture', 'photography', 'history'],
-    crowdLevel: 'Medium',
-    howToGetThere: 'Take a bus from Huangshan City to Xidi',
-    description: 'A well-preserved ancient village with traditional Hui-style architecture, intricate wood carvings, and a peaceful atmosphere.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Xidi%20Village%20ancient%20Chinese%20village%20with%20traditional%20Hui-style%20architecture&image_size=landscape_16_9'
-  },
-  {
-    id: 'sansha',
-    name: 'Sansha Town',
-    chineseName: '三沙镇',
-    province: 'Fujian Province',
-    tagline: 'Coastal Fishing Town',
-    whySpecial: 'A traditional fishing town with unique coastal architecture and fresh seafood',
-    bestSeason: 'Spring (April-June) and Autumn (September-November)',
-    idealTripLength: '2-3 days',
-    vibeTags: ['coastal', 'food', 'photography', 'relaxation'],
-    crowdLevel: 'Low',
-    howToGetThere: 'Take a bus from Xiamen to Dongshan Island, then local transport to Sansha',
-    description: 'A traditional fishing town with unique coastal architecture, fresh seafood, and a relaxed atmosphere. Perfect for a quiet coastal getaway.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Sansha%20Town%20coastal%20fishing%20town%20with%20traditional%20stone%20houses%20and%20fishing%20boats&image_size=landscape_16_9'
+    gettingThere: 'High-speed train to Huangshan North Station, followed by a 1-hour bus ride.',
+    coordinates: { x: 80, y: 50 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Traditional%20Chinese%20village%20with%20white%20walls%20and%20black%20roofs%20reflected%20in%20a%20still%20moon-shaped%20pond,%20misty,%20poetic,%20high%20resolution&image_size=landscape_16_9'
   },
   {
     id: 'langmusi',
-    name: 'Langmusi',
-    chineseName: '郎木寺',
-    province: 'Gansu/Sichuan Provinces',
-    tagline: 'Tibetan Border Town',
-    whySpecial: 'A small town on the border of Gansu and Sichuan with Tibetan monasteries and stunning natural scenery',
-    bestSeason: 'Summer (June-August)',
-    idealTripLength: '2-3 days',
-    vibeTags: ['mountains', 'culture', 'photography', 'spiritual'],
+    nameEn: 'Langmusi',
+    nameZh: '郎木寺',
+    province: 'Gansu / Sichuan',
+    tagline: 'The little Switzerland of the East.',
+    description: 'A border town straddling two provinces, surrounded by alpine meadows and red sandstone cliffs. Home to two major Tibetan Buddhist monasteries and a deep sense of peace.',
+    bestSeason: ['Summer', 'Autumn'],
+    tripLength: '3 days',
+    vibes: ['heritage', 'mountains', 'quiet'],
     crowdLevel: 'Low',
-    howToGetThere: 'Take a bus from Xiahe or Chengdu to Langmusi',
-    description: 'A small town on the border of Gansu and Sichuan with Tibetan monasteries, stunning natural scenery, and a peaceful atmosphere.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Langmusi%20Tibetan%20border%20town%20with%20monastery%20and%20mountain%20backdrop&image_size=landscape_16_9'
+    gettingThere: 'Fly to Jiuzhai Huanglong Airport or Xiahe Airport, then take a long-distance bus or private car.',
+    coordinates: { x: 55, y: 45 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Tibetan%20monasteries%20with%20golden%20roofs%20nestled%20in%20a%20green%20alpine%20valley%20with%20red%20cliffs%20in%20the%20background,%20sunny%20day,%20vibrant%20colors&image_size=landscape_16_9'
   },
   {
-    id: 'fenghuang',
-    name: 'Fenghuang Ancient Town',
-    chineseName: '凤凰古城',
-    province: 'Hunan Province',
-    tagline: 'Phoenix Ancient Town',
-    whySpecial: 'A well-preserved ancient town with unique Miao and Tujia ethnic culture and architecture',
-    bestSeason: 'Spring (March-May) and Autumn (September-November)',
-    idealTripLength: '2-3 days',
-    vibeTags: ['heritage', 'culture', 'photography', 'history'],
-    crowdLevel: 'Medium to High',
-    howToGetThere: 'Take a train to Jishou, then a bus to Fenghuang',
-    description: 'A well-preserved ancient town with unique Miao and Tujia ethnic culture, traditional architecture, and scenic river views.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Fenghuang%20Ancient%20Town%20with%20traditional%20wooden%20houses%20along%20the%20river&image_size=landscape_16_9'
-  },
-  {
-    id: 'yueyang',
-    name: 'Yueyang Tower',
-    chineseName: '岳阳楼',
-    province: 'Hunan Province',
-    tagline: 'Ancient Water Tower',
-    whySpecial: 'One of the Four Great Towers of China with stunning views of Dongting Lake',
-    bestSeason: 'Spring (March-May) and Autumn (September-November)',
-    idealTripLength: '1-2 days',
-    vibeTags: ['heritage', 'history', 'photography', 'culture'],
+    id: 'enshi',
+    nameEn: 'Enshi Grand Canyon',
+    nameZh: '恩施大峡谷',
+    province: 'Hubei',
+    tagline: 'Nature’s sculptural masterpiece.',
+    description: 'A spectacular landscape of deep gorges, karst pillars, underground rivers, and the iconic "One Incense Pillar" rock formation. An adventurer’s paradise.',
+    bestSeason: ['Spring', 'Summer'],
+    tripLength: '2-3 days',
+    vibes: ['mountains', 'nature', 'photography'],
     crowdLevel: 'Medium',
-    howToGetThere: 'Take a train to Yueyang, then local transport to Yueyang Tower',
-    description: 'One of the Four Great Towers of China with stunning views of Dongting Lake and rich historical significance.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Yueyang%20Tower%20ancient%20Chinese%20tower%20with%20Dongting%20Lake%20in%20the%20background&image_size=landscape_16_9'
+    gettingThere: 'Fly to Enshi Xujiaping Airport or take a high-speed train to Enshi Station, then a 1.5-hour bus to the canyon.',
+    coordinates: { x: 65, y: 55 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Dramatic%20deep%20green%20canyon%20with%20towering%20karst%20stone%20pillars%20rising%20from%20the%20mist,%20epic%20scale,%20National%20Geographic&image_size=landscape_16_9'
   },
   {
     id: 'wuyuan',
-    name: 'Wuyuan',
-    chineseName: '婺源',
-    province: 'Jiangxi Province',
-    tagline: 'Rural China Paradise',
-    whySpecial: 'Known for its beautiful countryside, ancient villages, and rape flower fields',
-    bestSeason: 'Spring (March-April) for rape flowers, Autumn (October-November) for autumn colors',
-    idealTripLength: '2-3 days',
-    vibeTags: ['rural', 'photography', 'nature', 'heritage'],
-    crowdLevel: 'Medium to High during peak seasons',
-    howToGetThere: 'Take a train to Jingdezhen, then a bus to Wuyuan',
-    description: 'Beautiful countryside with ancient villages, rape flower fields, and traditional Huizhou architecture. A perfect place to experience rural China.',
-    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Wuyuan%20countryside%20with%20rape%20flower%20fields%20and%20ancient%20villages&image_size=landscape_16_9'
+    nameEn: 'Wuyuan',
+    nameZh: '婺源',
+    province: 'Jiangxi',
+    tagline: 'The most beautiful countryside.',
+    description: 'Famous for its sweeping terraces of yellow canola flowers in spring and fiery red maple leaves in autumn, dotted with well-preserved Huizhou-style ancient architecture.',
+    bestSeason: ['Spring', 'Autumn'],
+    tripLength: '2-3 days',
+    vibes: ['heritage', 'slow travel', 'photography'],
+    crowdLevel: 'Medium',
+    gettingThere: 'High-speed train to Wuyuan Station, then rent a car or take local buses between villages.',
+    coordinates: { x: 80, y: 55 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Terraced%20fields%20of%20bright%20yellow%20canola%20flowers%20surrounding%20ancient%20Chinese%20villages%20with%20white%20walls,%20springtime,%20beautiful%20light&image_size=landscape_16_9'
+  },
+  {
+    id: 'tengchong',
+    nameEn: 'Tengchong',
+    nameZh: '腾冲',
+    province: 'Yunnan',
+    tagline: 'Volcanoes, hot springs, and history.',
+    description: 'A laid-back border town near Myanmar known for its geothermal hot springs, ancient volcanic craters, and the centuries-old Heshun ancient town.',
+    bestSeason: ['Autumn', 'Winter'],
+    tripLength: '3-4 days',
+    vibes: ['slow travel', 'heritage', 'quiet'],
+    crowdLevel: 'Low',
+    gettingThere: 'Fly directly to Tengchong Tuofeng Airport.',
+    coordinates: { x: 35, y: 70 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Ancient%20Chinese%20town%20with%20cobblestone%20streets,%20lush%20greenery,%20and%20steam%20rising%20from%20natural%20hot%20springs%20in%20the%20distance,%20warm%20atmosphere&image_size=landscape_16_9'
+  },
+  {
+    id: 'chongzuo',
+    nameEn: 'Chongzuo',
+    nameZh: '崇左',
+    province: 'Guangxi',
+    tagline: 'Karst mountains meeting the border.',
+    description: 'Home to the magnificent Detian Waterfall on the China-Vietnam border, surrounded by lush sugarcane fields and surreal karst peaks without the crowds of Guilin.',
+    bestSeason: ['Summer', 'Autumn'],
+    tripLength: '2-3 days',
+    vibes: ['nature', 'photography', 'quiet'],
+    crowdLevel: 'Low',
+    gettingThere: 'Fly to Nanning Wuxu Airport, then drive 2-3 hours to Chongzuo.',
+    coordinates: { x: 60, y: 75 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Massive%20multi-tiered%20waterfall%20surrounded%20by%20tropical%20karst%20mountains%20and%20lush%20greenery,%20epic%20landscape,%20beautiful%20sunlight&image_size=landscape_16_9'
+  },
+  {
+    id: 'pingyao',
+    nameEn: 'Pingyao',
+    nameZh: '平遥',
+    province: 'Shanxi',
+    tagline: 'A journey back to the Ming Dynasty.',
+    description: 'One of the best-preserved ancient walled cities in the world. Walking its lantern-lit streets at night feels like stepping directly into a historical drama.',
+    bestSeason: ['Spring', 'Autumn'],
+    tripLength: '2 days',
+    vibes: ['heritage', 'photography'],
+    crowdLevel: 'High',
+    gettingThere: 'High-speed train to Pingyao Ancient City Station.',
+    coordinates: { x: 65, y: 35 },
+    image: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=Ancient%20Chinese%20walled%20city%20street%20at%20dusk,%20glowing%20red%20lanterns,%20traditional%20courtyard%20architecture,%20moody%20and%20cinematic&image_size=landscape_16_9'
   }
 ];

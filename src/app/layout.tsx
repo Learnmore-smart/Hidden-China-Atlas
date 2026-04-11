@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { LanguageProvider } from '@/lib/languageContext'
 
-const inter = Inter({ subsets: ['latin'] })
+const sans = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-sans' })
+const serif = Playfair_Display({ subsets: ['latin'], variable: '--font-serif' })
 
 export const metadata: Metadata = {
   title: 'Hidden China Atlas - Discover the Side of China Most Tourists Never See',
@@ -22,12 +23,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <LanguageProvider>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
+      <body className="font-sans bg-[#F9F9F7] text-[#1A1A1A] antialiased selection:bg-[#E5EAE3] selection:text-[#1A1A1A]">
+        <LanguageProvider>
           {children}
-        </body>
-      </html>
-    </LanguageProvider>
+        </LanguageProvider>
+      </body>
+    </html>
   )
 }

@@ -1,122 +1,105 @@
 "use client";
 
-import React from 'react';
+import { useTranslation } from "@/lib/languageContext";
+import { Filter } from "lucide-react";
 
-interface FilterComponentProps {
-  onFilterChange: (filters: FilterState) => void;
+interface FilterProps {
+  activeVibe: string | null;
+  setActiveVibe: (v: string | null) => void;
+  activeSeason: string | null;
+  setActiveSeason: (s: string | null) => void;
 }
 
-export interface FilterState {
-  season: string;
-  vibe: string;
-  tripLength: string;
-  crowdLevel: string;
-}
+export default function FilterComponent({ activeVibe, setActiveVibe, activeSeason, setActiveSeason }: FilterProps) {
+  const { language } = useTranslation();
 
-const FilterComponent: React.FC<FilterComponentProps> = ({ onFilterChange }) => {
-  const [filters, setFilters] = React.useState<FilterState>({
-    season: '',
-    vibe: '',
-    tripLength: '',
-    crowdLevel: ''
-  });
+  const vibesList = [
+    { id: 'mountains', labelEn: 'Mountains', labelZh: '山水' },
+    { id: 'photography', labelEn: 'Photography', labelZh: '摄影' },
+    { id: 'heritage', labelEn: 'Heritage', labelZh: '人文古迹' },
+    { id: 'slow travel', labelEn: 'Slow Travel', labelZh: '慢旅行' },
+    { id: 'quiet', labelEn: 'Quiet', labelZh: '安静避世' },
+    { id: 'coastal', labelEn: 'Coastal', labelZh: '海滨' },
+    { id: 'nature', labelEn: 'Nature', labelZh: '自然' },
+  ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    const newFilters = { ...filters, [name]: value };
-    setFilters(newFilters);
-    onFilterChange(newFilters);
-  };
-
-  const resetFilters = () => {
-    const resetFilters: FilterState = {
-      season: '',
-      vibe: '',
-      tripLength: '',
-      crowdLevel: ''
-    };
-    setFilters(resetFilters);
-    onFilterChange(resetFilters);
-  };
+  const seasonsList = [
+    { id: 'Spring', labelEn: 'Spring', labelZh: '春季' },
+    { id: 'Summer', labelEn: 'Summer', labelZh: '夏季' },
+    { id: 'Autumn', labelEn: 'Autumn', labelZh: '秋季' },
+    { id: 'Winter', labelEn: 'Winter', labelZh: '冬季' },
+  ];
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold mb-4 md:mb-0">Filter Destinations</h3>
-        <button 
-          onClick={resetFilters}
-          className="text-sm text-primary hover:underline"
-        >
-          Reset Filters
-        </button>
+    <div className="flex flex-col gap-6 py-8 border-y border-earthLight mb-12">
+      <div className="flex items-center gap-2 text-ink font-serif text-xl">
+        <Filter size={20} className="text-jade" />
+        {language === 'en' ? 'Refine Your Search' : '筛选目的地'}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <div className="grid md:grid-cols-2 gap-8">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Season</label>
-          <select
-            name="season"
-            value={filters.season}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">All Seasons</option>
-            <option value="Spring">Spring</option>
-            <option value="Summer">Summer</option>
-            <option value="Autumn">Autumn</option>
-            <option value="Winter">Winter</option>
-          </select>
+          <h4 className="text-sm font-medium text-slate mb-3 uppercase tracking-wider">
+            {language === 'en' ? 'By Vibe' : '按氛围'}
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveVibe(null)}
+              className={`px-3 py-1.5 rounded-full text-xs transition-all ${
+                activeVibe === null 
+                  ? 'bg-ink text-white' 
+                  : 'bg-white text-slate border border-earthLight hover:border-ink/30'
+              }`}
+            >
+              {language === 'en' ? 'All' : '全部'}
+            </button>
+            {vibesList.map(v => (
+              <button
+                key={v.id}
+                onClick={() => setActiveVibe(v.id)}
+                className={`px-3 py-1.5 rounded-full text-xs transition-all ${
+                  activeVibe === v.id 
+                    ? 'bg-ink text-white' 
+                    : 'bg-white text-slate border border-earthLight hover:border-ink/30'
+                }`}
+              >
+                {language === 'en' ? v.labelEn : v.labelZh}
+              </button>
+            ))}
+          </div>
         </div>
+        
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Vibe</label>
-          <select
-            name="vibe"
-            value={filters.vibe}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">All Vibes</option>
-            <option value="coastal">Coastal</option>
-            <option value="mountains">Mountains</option>
-            <option value="heritage">Heritage</option>
-            <option value="culture">Culture</option>
-            <option value="relaxation">Relaxation</option>
-            <option value="photography">Photography</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Trip Length</label>
-          <select
-            name="tripLength"
-            value={filters.tripLength}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">All Lengths</option>
-            <option value="1-2 days">1-2 days</option>
-            <option value="2-3 days">2-3 days</option>
-            <option value="3-4 days">3-4 days</option>
-            <option value="4-5 days">4-5 days</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Crowd Level</label>
-          <select
-            name="crowdLevel"
-            value={filters.crowdLevel}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">All Crowd Levels</option>
-            <option value="Low">Low</option>
-            <option value="Low to Medium">Low to Medium</option>
-            <option value="Medium">Medium</option>
-            <option value="Medium to High">Medium to High</option>
-            <option value="High">High</option>
-          </select>
+          <h4 className="text-sm font-medium text-slate mb-3 uppercase tracking-wider">
+            {language === 'en' ? 'By Season' : '按季节'}
+          </h4>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveSeason(null)}
+              className={`px-3 py-1.5 rounded-full text-xs transition-all ${
+                activeSeason === null 
+                  ? 'bg-ink text-white' 
+                  : 'bg-white text-slate border border-earthLight hover:border-ink/30'
+              }`}
+            >
+              {language === 'en' ? 'All' : '全部'}
+            </button>
+            {seasonsList.map(s => (
+              <button
+                key={s.id}
+                onClick={() => setActiveSeason(s.id)}
+                className={`px-3 py-1.5 rounded-full text-xs transition-all ${
+                  activeSeason === s.id 
+                    ? 'bg-ink text-white' 
+                    : 'bg-white text-slate border border-earthLight hover:border-ink/30'
+                }`}
+              >
+                {language === 'en' ? s.labelEn : s.labelZh}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default FilterComponent;
+}

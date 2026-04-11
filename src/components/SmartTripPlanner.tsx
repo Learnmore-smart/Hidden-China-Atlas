@@ -1,241 +1,164 @@
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { destinations, Destination } from '@/data/destinations';
-import { useTranslation } from '@/lib/languageContext';
+import { useState } from "react";
+import { useTranslation } from "@/lib/languageContext";
+import { destinations, Destination } from "@/data/destinations";
+import { Sparkles, ArrowRight, Plane, Map as MapIcon, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import DestinationCard from "./DestinationCard";
 
-interface TripPlan {
-  destination: Destination;
-  reason: string;
-  suggestedSeason: string;
-  recommendedDuration: string;
-  itinerary: string[];
-}
+export default function SmartTripPlanner() {
+  const { t, language } = useTranslation();
+  const [days, setDays] = useState<number>(3);
+  const [vibe, setVibe] = useState<string>("mountains");
+  const [isPlanning, setIsPlanning] = useState(false);
+  const [result, setResult] = useState<Destination[] | null>(null);
 
-const SmartTripPlanner: React.FC = () => {
-  const { t } = useTranslation();
-  const [formData, setFormData] = useState({
-    departureCity: '',
-    numberOfDays: '',
-    interests: '',
-    avoidCrowds: false
-  });
-  const [tripPlans, setTripPlans] = useState<TripPlan[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const vibesList = [
+    { id: 'mountains', labelEn: 'Mountains', labelZh: '山水' },
+    { id: 'photography', labelEn: 'Photography', labelZh: '摄影' },
+    { id: 'heritage', labelEn: 'Heritage', labelZh: '人文古迹' },
+    { id: 'slow travel', labelEn: 'Slow Travel', labelZh: '慢旅行' },
+    { id: 'quiet', labelEn: 'Quiet', labelZh: '安静避世' },
+  ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
-  const generateTripPlans = () => {
-    setIsLoading(true);
+  const handlePlan = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsPlanning(true);
     
-    // 模拟 API 调用延迟
+    // Simulate AI thinking time
     setTimeout(() => {
-      const { numberOfDays, interests, avoidCrowds } = formData;
-      const days = parseInt(numberOfDays) || 3;
-      const interestTags = interests.toLowerCase().split(',').map(tag => tag.trim());
-
-      // 基于规则的推荐算法
-      let filteredDestinations = destinations;
-
-      // 避开人群过滤
-      if (avoidCrowds) {
-        filteredDestinations = filteredDestinations.filter(dest => 
-          dest.crowdLevel === 'Low' || dest.crowdLevel === 'Low to Medium'
-        );
-      }
-
-      // 兴趣标签匹配
-      if (interestTags.length > 0) {
-        filteredDestinations = filteredDestinations.filter(dest => 
-          interestTags.some(tag => 
-            dest.vibeTags.some(vibeTag => vibeTag.includes(tag)
-          )
-        )
-        );
-      }
-
-      // 旅行时长匹配
-      filteredDestinations = filteredDestinations.filter(dest => {
-        const destDays = parseInt(dest.idealTripLength);
-        return destDays <= days;
-      });
-
-      // 随机选择 2-3 个目的地
-      const shuffled = filteredDestinations.sort(() => 0.5 - Math.random());
-      const selected = shuffled.slice(0, Math.min(3, shuffled.length));
-
-      // 生成旅行计划
-      const plans: TripPlan[] = selected.map(destination => ({
-        destination,
-        reason: generateReason(destination, interestTags),
-        suggestedSeason: destination.bestSeason,
-        recommendedDuration: destination.idealTripLength,
-        itinerary: generateItinerary(destination),
-      }));
-
-      setTripPlans(plans);
-      setIsLoading(false);
-    }, 1000);
-  };
-
-  const generateReason = (destination: Destination, interests: string[]): string => {
-    const reasons = [
-      `Known for its ${destination.tagline.toLowerCase()}, ${destination.name} offers a unique experience that matches your interest in ${interests.length > 0 ? interests.join(' and ') : 'travel'}.`,
-      `${destination.name} is perfect for travelers seeking ${destination.vibeTags.join(' and ')} experiences.`,
-      `With its stunning ${destination.description.split(' ')[0]} scenery, ${destination.name} provides an unforgettable journey.`,
-      `${destination.name} is a hidden gem that offers ${destination.whySpecial.toLowerCase()}.`
-    ];
-    return reasons[Math.floor(Math.random() * reasons.length)];
-  };
-
-  const generateItinerary = (destination: Destination): string[] => {
-    const itineraries = {
-      '1-2 days': [
-        `Day 1: Explore the main attractions of ${destination.name}`,
-        `Day 2: Enjoy local cuisine and hidden spots`
-      ],
-      '2-3 days': [
-        `Day 1: Arrive and explore the central area`,
-        `Day 2: Visit surrounding natural attractions`,
-        `Day 3: Experience local culture and cuisine`
-      ],
-      '3-4 days': [
-        `Day 1: Arrive and settle in`,
-        `Day 2: Explore main attractions`,
-        `Day 3: Day trip to nearby sights`,
-        `Day 4: Relax and enjoy local cuisine`
-      ],
-      '4-5 days': [
-        `Day 1: Arrive and explore the town center`,
-        `Day 2: Visit cultural sites and museums`,
-        `Day 3: Day trip to natural attractions`,
-        `Day 4: Explore hidden spots and local markets`,
-        `Day 5: Relax and departure`
-      ]
-    };
-
-    return itineraries[destination.idealTripLength as keyof typeof itineraries] || [
-      `Day 1: Explore ${destination.name}`,
-      `Day 2: Enjoy local experiences`
-    ];
+      // Very simple rule: match vibe
+      const matched = destinations.filter(d => d.vibes.includes(vibe));
+      // Shuffle and pick 2
+      const shuffled = [...matched].sort(() => 0.5 - Math.random());
+      setResult(shuffled.slice(0, 2));
+      setIsPlanning(false);
+    }, 1500);
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-gray-50 rounded-xl p-8 shadow-sm">
-      <form 
-        className="space-y-6"
-        onSubmit={(e) => {
-          e.preventDefault();
-          generateTripPlans();
-        }}
-      >
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">{t('tripPlanner.departureCity')}</label>
-          <input 
-            type="text" 
-            name="departureCity"
-            value={formData.departureCity}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" 
-            placeholder="e.g., Beijing" 
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">{t('tripPlanner.numberOfDays')}</label>
-          <input 
-            type="number" 
-            name="numberOfDays"
-            value={formData.numberOfDays}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" 
-            placeholder="e.g., 5" 
-            min="1"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">{t('tripPlanner.interests')}</label>
-          <input 
-            type="text" 
-            name="interests"
-            value={formData.interests}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" 
-            placeholder="e.g., nature, culture, food" 
-          />
-        </div>
-        <div>
-          <label className="flex items-center">
-            <input 
-              type="checkbox" 
-              name="avoidCrowds"
-              checked={formData.avoidCrowds}
-              onChange={handleChange}
-              className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" 
-            />
-            <span className="ml-2 block text-sm text-gray-700">{t('tripPlanner.avoidCrowds')}</span>
-          </label>
-        </div>
-        <button 
-          type="submit" 
-          className="w-full bg-primary hover:bg-primary/90 text-white px-4 py-3 rounded-lg font-medium transition-all"
-          disabled={isLoading}
-        >
-          {isLoading ? 'Generating...' : t('tripPlanner.generatePlan')}
-        </button>
-      </form>
+    <section id="planner" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="grid md:grid-cols-5 gap-16 items-center">
+          
+          <div className="md:col-span-2 space-y-8">
+            <div>
+              <h2 className="font-serif text-4xl text-ink mb-4">
+                {language === 'en' ? 'Smart Trip Planner' : '智能行程规划'}
+              </h2>
+              <p className="text-slate leading-relaxed">
+                {language === 'en' 
+                  ? 'Tell us what kind of experience you are looking for, and our planner will curate the perfect hidden destinations for your trip.'
+                  : '告诉我们您期望的旅行体验，我们的智能规划器将为您挑选最适合的隐藏目的地。'}
+              </p>
+            </div>
 
-      {/* Trip Plan Results */}
-      {tripPlans.length > 0 && (
-        <div className="mt-12 space-y-8">
-          <h3 className="text-2xl font-semibold mb-6">Your Trip Recommendations</h3>
-          {tripPlans.map((plan, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="flex flex-col md:flex-row md:items-start gap-6">
-                <div className="md:w-1/3 relative h-48">
-                  <Image 
-                    src={plan.destination.imageUrl} 
-                    alt={plan.destination.name}
-                    fill
-                    className="object-cover rounded-lg"
+            <form onSubmit={handlePlan} className="bg-offwhite p-8 rounded-3xl border border-earthLight space-y-6">
+              <div>
+                <label className="block text-sm font-medium text-ink mb-2">
+                  {language === 'en' ? 'How many days?' : '计划游玩几天？'}
+                </label>
+                <div className="flex items-center gap-4">
+                  <input 
+                    type="range" 
+                    min="1" max="14" 
+                    value={days}
+                    onChange={(e) => setDays(parseInt(e.target.value))}
+                    className="w-full accent-jade"
                   />
-                </div>
-                <div className="md:w-2/3">
-                  <h4 className="text-xl font-semibold mb-2">{plan.destination.name}</h4>
-                  <p className="text-gray-500 mb-4">{plan.destination.province}</p>
-                  <p className="text-gray-700 mb-4">{plan.reason}</p>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div>
-                      <span className="text-sm text-gray-600">Suggested Season:</span>
-                      <p className="font-medium">{plan.suggestedSeason}</p>
-                    </div>
-                    <div>
-                      <span className="text-sm text-gray-600">Recommended Duration:</span>
-                      <p className="font-medium">{plan.recommendedDuration}</p>
-                    </div>
-                  </div>
-                  <div>
-                    <h5 className="text-sm font-medium text-gray-700 mb-2">Suggested Itinerary:</h5>
-                    <ul className="list-disc list-inside space-y-1 text-gray-700">
-                      {plan.itinerary.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <span className="text-jade font-serif text-xl w-8">{days}</span>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
 
-export default SmartTripPlanner;
+              <div>
+                <label className="block text-sm font-medium text-ink mb-3">
+                  {language === 'en' ? 'What is your preferred vibe?' : '您偏好哪种氛围？'}
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {vibesList.map(v => (
+                    <button
+                      key={v.id}
+                      type="button"
+                      onClick={() => setVibe(v.id)}
+                      className={`px-4 py-2 rounded-full text-sm transition-all ${
+                        vibe === v.id 
+                          ? 'bg-jade text-white shadow-md' 
+                          : 'bg-white text-slate border border-earthLight hover:border-jade/50'
+                      }`}
+                    >
+                      {language === 'en' ? v.labelEn : v.labelZh}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isPlanning}
+                className="w-full py-4 bg-ink text-white rounded-xl font-medium hover:bg-ink/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-70"
+              >
+                {isPlanning ? (
+                  <><Loader2 size={18} className="animate-spin" /> {language === 'en' ? 'Curating...' : '正在为您挑选...'}</>
+                ) : (
+                  <><Sparkles size={18} /> {language === 'en' ? 'Generate Itinerary' : '生成推荐行程'}</>
+                )}
+              </button>
+            </form>
+          </div>
+
+          <div className="md:col-span-3">
+            <AnimatePresence mode="wait">
+              {!result ? (
+                <motion.div 
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="h-full min-h-[400px] border-2 border-dashed border-earthLight rounded-3xl flex flex-col items-center justify-center text-slate"
+                >
+                  <MapIcon size={48} className="mb-4 text-earth opacity-50" strokeWidth={1} />
+                  <p>{language === 'en' ? 'Your personalized recommendations will appear here.' : '您的专属推荐将显示在这里。'}</p>
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="results"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="space-y-6"
+                >
+                  <div className="flex items-center gap-3 text-jade mb-6">
+                    <Plane size={24} />
+                    <h3 className="font-serif text-2xl">
+                      {language === 'en' ? 'Your Curated Journey' : '您的专属旅程'}
+                    </h3>
+                  </div>
+                  
+                  <div className="grid sm:grid-cols-2 gap-6">
+                    {result.map((dest, i) => (
+                      <div key={dest.id} className="relative">
+                        <DestinationCard destination={dest} index={i} />
+                        {i === 0 && result.length > 1 && (
+                          <div className="hidden sm:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 bg-white rounded-full items-center justify-center shadow-sm border border-earthLight">
+                            <ArrowRight size={14} className="text-slate" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {result.length === 0 && (
+                    <p className="text-slate text-center py-12">
+                      {language === 'en' ? 'No exact match found. Try changing your preferences!' : '没有找到完全匹配的目的地。请尝试更改您的偏好！'}
+                    </p>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

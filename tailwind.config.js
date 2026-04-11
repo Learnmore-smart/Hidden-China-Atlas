@@ -8,16 +8,21 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#1e40af',
-        secondary: '#059669',
-        accent: '#065f46',
-        neutral: '#f8fafc',
-        'neutral-dark': '#1e293b',
-        'neutral-muted': '#64748b',
+        offwhite: '#F9F9F7',
+        ink: '#1A1A1A',
+        slate: '#64748B',
+        jade: '#5C7A6A',
+        jadeLight: '#E5EAE3',
+        earth: '#D1C4A8',
+        earthLight: '#F3F0EA',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },

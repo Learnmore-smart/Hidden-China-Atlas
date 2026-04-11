@@ -1,27 +1,26 @@
 "use client";
 
-import React from 'react';
-import { useTranslation } from '@/lib/languageContext';
+import { useTranslation } from "@/lib/languageContext";
+import { motion } from "framer-motion";
+import { Globe } from "lucide-react";
 
-const LanguageSwitcher: React.FC = () => {
+export default function LanguageSwitcher() {
   const { language, setLanguage } = useTranslation();
 
-  return (
-    <div className="flex items-center gap-2">
-      <button
-        onClick={() => setLanguage('en')}
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${language === 'en' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-      >
-        English
-      </button>
-      <button
-        onClick={() => setLanguage('zh')}
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${language === 'zh' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
-      >
-        中文
-      </button>
-    </div>
-  );
-};
+  const toggleLanguage = () => {
+    setLanguage(language === 'en' ? 'zh' : 'en');
+  };
 
-export default LanguageSwitcher;
+  return (
+    <button
+      onClick={toggleLanguage}
+      className="fixed top-6 right-6 z-50 flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm font-medium text-ink hover:text-jade transition-colors duration-300"
+      aria-label="Toggle Language"
+    >
+      <Globe size={16} />
+      <span className="w-6 text-center">
+        {language === 'en' ? '中' : 'EN'}
+      </span>
+    </button>
+  );
+}
