@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { destinations } from '@/data/destinations';
+import { useTranslation } from '@/lib/languageContext';
 
 // Coordinate mapping for our destinations (1000x800 viewBox)
 const coordinateMap: Record<string, { x: number, y: number }> = {
@@ -40,6 +41,7 @@ const connections = [
 ];
 
 const ChinaMap: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
@@ -190,7 +192,7 @@ const ChinaMap: React.FC = () => {
                   animate={{ opacity: 1, x: pos.x + 15 }}
                   transition={{ delay: i * 0.1 + 0.5 }}
                 >
-                  {dest.name}
+                  {t(`destinations.${dest.id}.name`)}
                 </motion.text>
               </g>
             );
@@ -204,7 +206,7 @@ const ChinaMap: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-white text-3xl md:text-5xl font-serif tracking-wide"
           >
-            The Cartography <br/><span className="text-white/50 italic">of Calm</span>
+            {t('map.title')} <br/><span className="text-white/50 italic">{t('map.subtitle')}</span>
           </motion.h3>
         </div>
       </div>
@@ -232,7 +234,7 @@ const ChinaMap: React.FC = () => {
                 onClick={() => setSelectedId(null)}
                 className="absolute top-6 right-6 text-white/50 hover:text-white uppercase tracking-widest text-xs transition-colors"
               >
-                Close
+                {t('map.close')}
               </button>
             </div>
 
@@ -244,27 +246,27 @@ const ChinaMap: React.FC = () => {
                 transition={{ delay: 0.3 }}
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="text-accent text-xs uppercase tracking-widest">{selectedDest.province}</span>
+                  <span className="text-accent text-xs uppercase tracking-widest">{t(`destinations.${selectedDest.id}.province`)}</span>
                   <span className="w-8 h-px bg-white/20"></span>
-                  <span className="text-white/40 text-xs">{selectedDest.idealTripLength}</span>
+                  <span className="text-white/40 text-xs">{t(`destinations.${selectedDest.id}.idealTripLength`)}</span>
                 </div>
                 
-                <h4 className="text-3xl md:text-4xl font-serif text-white mb-2">{selectedDest.name}</h4>
-                <p className="text-white/40 font-serif italic mb-8">{selectedDest.chineseName} — {selectedDest.tagline}</p>
+                <h4 className="text-3xl md:text-4xl font-serif text-white mb-2">{t(`destinations.${selectedDest.id}.name`)}</h4>
+                <p className="text-white/40 font-serif italic mb-8">{selectedDest.chineseName} — {t(`destinations.${selectedDest.id}.tagline`)}</p>
                 
                 <p className="text-white/80 font-light leading-relaxed mb-8">
-                  {selectedDest.description}
+                  {t(`destinations.${selectedDest.id}.description`)}
                 </p>
 
                 <div className="space-y-6 border-t border-white/10 pt-8">
                   <div>
-                    <span className="block text-xs uppercase tracking-widest text-white/40 mb-2">Why It's Special</span>
-                    <p className="text-sm text-white/90 font-light">{selectedDest.whySpecial}</p>
+                    <span className="block text-xs uppercase tracking-widest text-white/40 mb-2">{t('map.whySpecial')}</span>
+                    <p className="text-sm text-white/90 font-light">{t(`destinations.${selectedDest.id}.whySpecial`)}</p>
                   </div>
                   <div>
-                    <span className="block text-xs uppercase tracking-widest text-white/40 mb-2">Atmosphere</span>
+                    <span className="block text-xs uppercase tracking-widest text-white/40 mb-2">{t('map.atmosphere')}</span>
                     <div className="flex flex-wrap gap-2">
-                      {selectedDest.vibeTags.map(tag => (
+                      {(t(`destinations.${selectedDest.id}.vibeTags`) as unknown as string[]).map(tag => (
                         <span key={tag} className="text-xs border border-white/10 px-3 py-1 rounded-full text-white/60">
                           {tag}
                         </span>
