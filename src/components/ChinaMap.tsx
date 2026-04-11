@@ -79,11 +79,11 @@ const ChinaMap: React.FC = () => {
   return (
     <div className="relative w-full max-w-4xl mx-auto">
       {/* 中国地图 SVG */}
-      <div className="relative">
+      <div className="relative w-full aspect-[4/3] max-h-[600px] mx-auto">
         <svg
           width="100%"
-          height="600"
-          viewBox="0 0 100 100"
+          height="100%"
+          viewBox="0 0 100 80"
           className="cursor-pointer"
           onClick={handleMapClick}
         >
@@ -113,23 +113,32 @@ const ChinaMap: React.FC = () => {
 
           {/* 地图标记 */}
           {markers.map((marker) => (
-            <g key={marker.id} onClick={(e) => {
-              e.stopPropagation();
-              handleMarkerClick(marker);
-            }}>
+            <g 
+              key={marker.id} 
+              onClick={(e) => {
+                e.stopPropagation();
+                handleMarkerClick(marker);
+              }}
+              className="cursor-pointer"
+              style={{ transformOrigin: `${marker.x}px ${marker.y}px` }}
+            >
+              {/* 扩大点击区域的透明圆 */}
+              <circle cx={marker.x} cy={marker.y} r="4" fill="transparent" />
               <circle
                 cx={marker.x}
                 cy={marker.y}
                 r="1"
                 fill={selectedMarker?.id === marker.id ? '#1e40af' : '#059669'}
-                className="transition-all transform hover:scale-150"
+                className="transition-all duration-300"
+                style={{ transform: selectedMarker?.id === marker.id ? 'scale(1.5)' : 'scale(1)' }}
               />
               <circle
                 cx={marker.x}
                 cy={marker.y}
                 r="2"
                 fill={selectedMarker?.id === marker.id ? 'rgba(30, 64, 175, 0.3)' : 'rgba(5, 150, 105, 0.3)'}
-                className="transition-all transform hover:scale-125"
+                className="transition-all duration-300"
+                style={{ transform: selectedMarker?.id === marker.id ? 'scale(1.5)' : 'scale(1)' }}
               />
             </g>
           ))}
@@ -138,7 +147,7 @@ const ChinaMap: React.FC = () => {
 
       {/* 选中标记的详情 */}
       {selectedMarker && (
-        <div className="absolute top-4 right-4 bg-white p-6 rounded-lg shadow-md max-w-xs">
+        <div className="absolute top-4 right-4 bg-white p-6 rounded-lg shadow-xl max-w-xs z-10 border border-primary/10">
           <h3 className="text-xl font-semibold mb-1">{selectedMarker.name}</h3>
           <p className="text-gray-500 mb-3">{selectedMarker.province}</p>
           <p className="text-gray-700 mb-4">{selectedMarker.description}</p>
