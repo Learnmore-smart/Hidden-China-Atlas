@@ -14,9 +14,8 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
   const destName = language === 'zh' ? destination.chineseName : destination.name;
   const destProvince = destination.province;
   
-  // Use text_to_image for premium quality images
-  const prompt = encodeURIComponent(`epic travel photography of ${destination.name} ${destProvince} premium editorial shot serene beautiful`);
-  const imageUrl = `https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=${prompt}&image_size=portrait_4_3`;
+  // Use destination image from local public folder
+  const imageUrl = destination.imageUrl;
 
   return (
     <div className="group cursor-pointer flex flex-col gap-6">
