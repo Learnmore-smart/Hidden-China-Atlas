@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { SlidersHorizontal } from 'lucide-react';
 
 interface FilterComponentProps {
   onFilterChange: (filters: FilterState) => void;
@@ -40,79 +41,83 @@ const FilterComponent: React.FC<FilterComponentProps> = ({ onFilterChange }) => 
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold mb-4 md:mb-0">Filter Destinations</h3>
-        <button 
-          onClick={resetFilters}
-          className="text-sm text-primary hover:underline"
-        >
-          Reset Filters
-        </button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Season</label>
-          <select
-            name="season"
-            value={filters.season}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">All Seasons</option>
-            <option value="Spring">Spring</option>
-            <option value="Summer">Summer</option>
-            <option value="Autumn">Autumn</option>
-            <option value="Winter">Winter</option>
-          </select>
+    <div className="border-y border-primary/10 py-8 mb-16">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+        <div className="flex items-center gap-3 text-primary">
+          <SlidersHorizontal className="w-5 h-5" />
+          <h3 className="font-serif text-2xl">Refine Search</h3>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Vibe</label>
-          <select
-            name="vibe"
-            value={filters.vibe}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+        
+        <div className="flex flex-wrap items-center gap-6 flex-1 md:justify-end">
+          <div className="relative group">
+            <select
+              name="season"
+              value={filters.season}
+              onChange={handleChange}
+              className="appearance-none bg-transparent border-b border-primary/20 text-sm py-2 pr-8 focus:outline-none focus:border-primary hover:border-primary transition-colors cursor-pointer"
+            >
+              <option value="">Any Season</option>
+              <option value="Spring">Spring</option>
+              <option value="Summer">Summer</option>
+              <option value="Autumn">Autumn</option>
+              <option value="Winter">Winter</option>
+            </select>
+          </div>
+          
+          <div className="relative group">
+            <select
+              name="vibe"
+              value={filters.vibe}
+              onChange={handleChange}
+              className="appearance-none bg-transparent border-b border-primary/20 text-sm py-2 pr-8 focus:outline-none focus:border-primary hover:border-primary transition-colors cursor-pointer"
+            >
+              <option value="">Any Vibe</option>
+              <option value="coastal">Coastal</option>
+              <option value="mountains">Mountains</option>
+              <option value="heritage">Heritage</option>
+              <option value="culture">Culture</option>
+              <option value="relaxation">Relaxation</option>
+              <option value="photography">Photography</option>
+            </select>
+          </div>
+          
+          <div className="relative group">
+            <select
+              name="tripLength"
+              value={filters.tripLength}
+              onChange={handleChange}
+              className="appearance-none bg-transparent border-b border-primary/20 text-sm py-2 pr-8 focus:outline-none focus:border-primary hover:border-primary transition-colors cursor-pointer"
+            >
+              <option value="">Any Duration</option>
+              <option value="1-2 days">1-2 Days</option>
+              <option value="2-3 days">2-3 Days</option>
+              <option value="3-4 days">3-4 Days</option>
+              <option value="4-5 days">4-5 Days</option>
+            </select>
+          </div>
+          
+          <div className="relative group">
+            <select
+              name="crowdLevel"
+              value={filters.crowdLevel}
+              onChange={handleChange}
+              className="appearance-none bg-transparent border-b border-primary/20 text-sm py-2 pr-8 focus:outline-none focus:border-primary hover:border-primary transition-colors cursor-pointer"
+            >
+              <option value="">Any Crowd Level</option>
+              <option value="Low">Low</option>
+              <option value="Low to Medium">Low to Medium</option>
+              <option value="Medium">Medium</option>
+              <option value="Medium to High">Medium to High</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+
+          <button 
+            onClick={resetFilters}
+            className="text-xs tracking-widest uppercase text-neutral-muted hover:text-primary transition-colors ml-4"
           >
-            <option value="">All Vibes</option>
-            <option value="coastal">Coastal</option>
-            <option value="mountains">Mountains</option>
-            <option value="heritage">Heritage</option>
-            <option value="culture">Culture</option>
-            <option value="relaxation">Relaxation</option>
-            <option value="photography">Photography</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Trip Length</label>
-          <select
-            name="tripLength"
-            value={filters.tripLength}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">All Lengths</option>
-            <option value="1-2 days">1-2 days</option>
-            <option value="2-3 days">2-3 days</option>
-            <option value="3-4 days">3-4 days</option>
-            <option value="4-5 days">4-5 days</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Crowd Level</label>
-          <select
-            name="crowdLevel"
-            value={filters.crowdLevel}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-          >
-            <option value="">All Crowd Levels</option>
-            <option value="Low">Low</option>
-            <option value="Low to Medium">Low to Medium</option>
-            <option value="Medium">Medium</option>
-            <option value="Medium to High">Medium to High</option>
-            <option value="High">High</option>
-          </select>
+            Clear
+          </button>
         </div>
       </div>
     </div>

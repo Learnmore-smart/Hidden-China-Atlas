@@ -7,18 +7,19 @@ const LanguageSwitcher: React.FC = () => {
   const { language, setLanguage } = useTranslation();
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-4 text-xs tracking-widest uppercase font-medium">
       <button
         onClick={() => setLanguage('en')}
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${language === 'en' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+        className={`transition-all duration-300 ${language === 'en' ? 'text-current opacity-100' : 'text-current opacity-40 hover:opacity-70'}`}
       >
-        English
+        EN
       </button>
+      <span className="opacity-20">|</span>
       <button
         onClick={() => setLanguage('zh')}
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-all ${language === 'zh' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+        className={`transition-all duration-300 ${language === 'zh' ? 'text-current opacity-100' : 'text-current opacity-40 hover:opacity-70'}`}
       >
-        中文
+        CN
       </button>
     </div>
   );

@@ -1,49 +1,59 @@
 import React from 'react';
 import Image from 'next/image';
 import { Destination } from '@/data/destinations';
+import { useTranslation } from '@/lib/languageContext';
 
 interface DestinationCardProps {
   destination: Destination;
 }
 
 const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
+  const { language } = useTranslation();
+  
+  // Try to get translated destination data if available, fallback to default
+  const destName = language === 'zh' ? destination.chineseName : destination.name;
+  const destProvince = destination.province;
+  
+  // Use text_to_image for premium quality images
+  const prompt = encodeURIComponent(`epic travel photography of ${destination.name} ${destProvince} premium editorial shot serene beautiful`);
+  const imageUrl = `https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=${prompt}&image_size=portrait_4_3`;
+
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
-      <div className="h-56 overflow-hidden relative">
+    <div className="group cursor-pointer flex flex-col gap-6">
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-neutral-dark/5">
         <Image 
-          src={destination.imageUrl} 
+          src={imageUrl} 
           alt={destination.name}
           fill
-          className="object-cover transition-transform duration-500 hover:scale-110"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
         />
+        <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
       </div>
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-semibold">{destination.name}</h3>
-          <span className="text-sm text-gray-500">{destination.chineseName}</span>
+      
+      <div className="flex flex-col gap-3 px-2">
+        <div className="flex justify-between items-end gap-4">
+          <h3 className="text-2xl font-serif leading-none">{destName}</h3>
+          <span className="text-xs uppercase tracking-widest text-neutral-muted font-medium shrink-0">
+            {destination.province}
+          </span>
         </div>
-        <p className="text-gray-500 mb-3">{destination.province}</p>
-        <p className="text-gray-700 mb-4">{destination.description}</p>
-        <div className="flex flex-wrap gap-2 mb-4">
+        
+        <p className="text-neutral-muted font-light leading-relaxed line-clamp-2">
+          {destination.description}
+        </p>
+        
+        <div className="flex flex-wrap gap-2 mt-2">
           {destination.vibeTags.map((tag, index) => (
-            <span key={index} className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded">
+            <span key={index} className="text-xs uppercase tracking-wider text-primary/70 border border-primary/10 px-3 py-1">
               {tag}
             </span>
           ))}
         </div>
-        <div className="space-y-2 text-sm">
-          <div className="flex justify-between">
-            <span className="text-gray-600">Best Season:</span>
-            <span className="font-medium">{destination.bestSeason}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Ideal Trip Length:</span>
-            <span className="font-medium">{destination.idealTripLength}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-600">Crowd Level:</span>
-            <span className="font-medium">{destination.crowdLevel}</span>
-          </div>
+        
+        <div className="flex items-center gap-4 mt-4 text-xs tracking-widest uppercase text-neutral-muted pt-4 border-t border-primary/10">
+          <span>{destination.bestSeason}</span>
+          <span className="w-1 h-1 rounded-full bg-accent/50" />
+          <span>{destination.idealTripLength}</span>
         </div>
       </div>
     </div>
