@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'trae-api-cn.mchost.guru',
+        hostname: 'coreva-normal.trae.ai',
       },
     ],
   },

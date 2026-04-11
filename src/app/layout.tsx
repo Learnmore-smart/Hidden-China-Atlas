@@ -1,16 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Manrope, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 import { LanguageProvider } from '@/lib/languageContext'
 
-const inter = Inter({ subsets: ['latin'] })
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-sans' })
+const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'], variable: '--font-serif' })
 
 export const metadata: Metadata = {
-  title: 'Hidden China Atlas - Discover the Side of China Most Tourists Never See',
-  description: 'Explore hidden gems, lesser-known destinations, and local beauty across China with our interactive map and smart trip planner.',
+  title: 'Hidden China Atlas - Journey Beyond the Ordinary',
+  description: 'Curated escapes, hidden gems, and local beauty across China. Uncover destinations untouched by typical tourist routes.',
   openGraph: {
-    title: 'Hidden China Atlas',
-    description: 'Discover the side of China most tourists never see',
+    title: 'Hidden China Atlas - Curated Journeys',
+    description: 'Journey beyond the ordinary. Discover destinations most travelers never see.',
     type: 'website',
     url: 'https://hiddenchinaatlas.com',
   },
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <LanguageProvider>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${manrope.variable} ${cormorant.variable} font-sans bg-neutral text-primary antialiased`}>
           {children}
         </body>
       </html>

@@ -28,55 +28,55 @@ export const useTranslation = () => {
 const translations = {
   en: {
     hero: {
-      title: "Discover the side of China most tourists never see",
-      subtitle: "Explore hidden gems, lesser-known destinations, and local beauty beyond the usual route",
-      exploreMap: "Explore the Map",
-      planTrip: "Plan My Trip"
+      title: "Journey Beyond the Ordinary",
+      subtitle: "Curated escapes into China's untouched landscapes. Experience the authentic, the serene, and the unforgettable.",
+      exploreMap: "Discover Destinations",
+      planTrip: "Design Your Journey"
     },
     map: {
-      title: "Explore the Map"
+      title: "The Cartography of Calm"
     },
     hiddenPicks: {
-      title: "Hidden Picks"
+      title: "Curated Escapes"
     },
     tripPlanner: {
-      title: "Plan My Trip",
-      departureCity: "Departure City",
-      numberOfDays: "Number of Days",
-      interests: "Interests",
-      avoidCrowds: "Avoid crowds",
-      generatePlan: "Generate Trip Plan"
+      title: "Design Your Journey",
+      departureCity: "Point of Origin",
+      numberOfDays: "Duration (Days)",
+      interests: "Pursuits",
+      avoidCrowds: "Seek Solitude",
+      generatePlan: "Craft Itinerary"
     },
     why: {
-      title: "Why Hidden China Atlas",
-      discover: "Discover Hidden Gems",
-      discoverDesc: "Find destinations beyond the usual tourist spots",
-      map: "Interactive Map",
-      mapDesc: "Explore China with our user-friendly map interface",
-      planner: "Smart Trip Planner",
-      plannerDesc: "Get personalized recommendations based on your preferences"
+      title: "The Art of Travel",
+      discover: "Uncharted Beauty",
+      discoverDesc: "Immerse yourself in destinations untouched by conventional tourism.",
+      map: "Spatial Poetry",
+      mapDesc: "Navigate pristine landscapes with our elegantly designed atlas.",
+      planner: "Bespoke Itineraries",
+      plannerDesc: "Tailored journeys crafted to your unique sensibilities and pace."
     },
     footer: {
-      about: "About",
-      destinations: "Destinations",
-      contact: "Contact",
+      about: "Philosophy",
+      destinations: "Journeys",
+      contact: "Inquiries",
       copyright: "All rights reserved."
     },
     destinations: {
       pingtan: {
         name: "Pingtan Island",
         province: "Fujian Province",
-        description: "A coastal gem with pristine beaches and unique stone houses"
+        description: "A coastal sanctuary defined by pristine beaches and architectural heritage."
       },
       gannan: {
-        name: "Gannan Tibetan Autonomous Prefecture",
+        name: "Gannan",
         province: "Gansu Province",
-        description: "Scenic grasslands and Tibetan culture in northwestern China"
+        description: "Vast rolling grasslands preserving the profound depth of Tibetan culture."
       },
       hongcun: {
-        name: "Hongcun Village",
+        name: "Hongcun",
         province: "Anhui Province",
-        description: "An ancient village with traditional Hui-style architecture"
+        description: "A living watercolor painting showcasing timeless Hui-style architecture."
       }
     }
   },

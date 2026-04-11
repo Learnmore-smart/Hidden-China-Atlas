@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from 'react'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import ChinaMap from '@/components/ChinaMap'
 import DestinationCard from '@/components/DestinationCard'
@@ -8,6 +10,20 @@ import FilterComponent, { FilterState } from '@/components/FilterComponent'
 import SmartTripPlanner from '@/components/SmartTripPlanner'
 import { destinations, Destination } from '@/data/destinations'
 import { useTranslation } from '@/lib/languageContext'
+import { Compass, Map as MapIcon, Sparkles, ArrowRight } from 'lucide-react'
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
 
 export default function Home() {
   const { t } = useTranslation()
@@ -36,116 +52,176 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen">
-      {/* Language Switcher */}
-      <div className="fixed top-4 right-4 z-50">
+    <div className="min-h-screen bg-neutral text-primary selection:bg-accent selection:text-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-6 flex justify-between items-center mix-blend-difference text-white">
+        <div className="font-serif text-2xl tracking-wide font-medium">Hidden China Atlas</div>
         <LanguageSwitcher />
-      </div>
+      </nav>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-green-50 z-0"></div>
-        <div className="container mx-auto px-4 z-10 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+      <section className="relative h-screen flex flex-col justify-end pb-32 px-6 md:px-16 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image 
+            src="https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=epic%20landscape%20photography%20of%20guilin%20karst%20mountains%20misty%20morning%20serene%20premium%20travel%20editorial%20shot&image_size=landscape_16_9"
+            alt="Hero Landscape"
+            fill
+            className="object-cover scale-105"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/80 z-0"></div>
+        </div>
+        
+        <motion.div 
+          className="relative z-10 max-w-4xl"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.h1 variants={fadeUp} className="text-5xl md:text-8xl font-serif text-white leading-tight mb-6">
             {t('hero.title')}
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
+          </motion.h1>
+          <motion.p variants={fadeUp} className="text-lg md:text-2xl text-white/80 font-light mb-10 max-w-2xl">
             {t('hero.subtitle')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105">
+          </motion.p>
+          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-6">
+            <button className="group flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-neutral transition-colors duration-300">
               {t('hero.exploreMap')}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="bg-white hover:bg-gray-50 text-primary border border-primary px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105">
+            <button className="group flex items-center justify-center gap-3 border border-white/30 text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-white/10 backdrop-blur-sm transition-colors duration-300">
               {t('hero.planTrip')}
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('map.title')}</h2>
-          <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
+      <section className="py-32 px-6 md:px-16 bg-neutral">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto"
+        >
+          <motion.div variants={fadeUp} className="mb-16 flex flex-col md:flex-row justify-between items-end gap-8 border-b border-primary/10 pb-8">
+            <h2 className="text-4xl md:text-6xl font-serif">{t('map.title')}</h2>
+            <p className="text-neutral-muted max-w-sm text-right font-light">
+              {t('why.mapDesc')}
+            </p>
+          </motion.div>
+          <motion.div variants={fadeUp} className="w-full aspect-[4/3] md:aspect-[21/9] bg-secondary rounded-none shadow-2xl shadow-black/5 overflow-hidden">
             <ChinaMap />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Hidden Picks Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('hiddenPicks.title')}</h2>
-          <FilterComponent onFilterChange={handleFilterChange} />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-32 px-6 md:px-16 bg-secondary">
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="mb-16"
+          >
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-serif mb-12">{t('hiddenPicks.title')}</motion.h2>
+            <motion.div variants={fadeUp}>
+              <FilterComponent onFilterChange={handleFilterChange} />
+            </motion.div>
+          </motion.div>
+          
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+          >
             {filteredDestinations.length > 0 ? (
               filteredDestinations.map((destination) => (
-                <DestinationCard key={destination.id} destination={destination} />
+                <motion.div key={destination.id} variants={fadeUp}>
+                  <DestinationCard destination={destination} />
+                </motion.div>
               ))
             ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-gray-500">No destinations match your filters. Please try adjusting your filter criteria.</p>
+              <div className="col-span-full py-24 border-y border-primary/10 text-center">
+                <p className="text-neutral-muted font-serif text-2xl italic">No sanctuaries match your refined criteria. Adjust your pursuits to reveal more.</p>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Smart Trip Planner Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('tripPlanner.title')}</h2>
-          <SmartTripPlanner />
-        </div>
+      <section className="py-32 px-6 md:px-16 bg-neutral border-t border-primary/5">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-4xl mx-auto text-center"
+        >
+          <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-serif mb-16">{t('tripPlanner.title')}</motion.h2>
+          <motion.div variants={fadeUp}>
+            <SmartTripPlanner />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Why Hidden China Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('why.title')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-primary text-2xl">🔍</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{t('why.discover')}</h3>
-              <p className="text-gray-600">{t('why.discoverDesc')}</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-secondary text-2xl">🗺️</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{t('why.map')}</h3>
-              <p className="text-gray-600">{t('why.mapDesc')}</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-purple-600 text-2xl">🤖</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{t('why.planner')}</h3>
-              <p className="text-gray-600">{t('why.plannerDesc')}</p>
-            </div>
+      <section className="py-32 px-6 md:px-16 bg-primary text-white">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto"
+        >
+          <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-serif mb-20">{t('why.title')}</motion.h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 border-t border-white/20 pt-16">
+            <motion.div variants={fadeUp} className="flex flex-col gap-6">
+              <Compass className="w-8 h-8 text-accent" strokeWidth={1.5} />
+              <h3 className="text-2xl font-serif">{t('why.discover')}</h3>
+              <p className="text-white/60 font-light leading-relaxed">{t('why.discoverDesc')}</p>
+            </motion.div>
+            <motion.div variants={fadeUp} className="flex flex-col gap-6">
+              <MapIcon className="w-8 h-8 text-accent" strokeWidth={1.5} />
+              <h3 className="text-2xl font-serif">{t('why.map')}</h3>
+              <p className="text-white/60 font-light leading-relaxed">{t('why.mapDesc')}</p>
+            </motion.div>
+            <motion.div variants={fadeUp} className="flex flex-col gap-6">
+              <Sparkles className="w-8 h-8 text-accent" strokeWidth={1.5} />
+              <h3 className="text-2xl font-serif">{t('why.planner')}</h3>
+              <p className="text-white/60 font-light leading-relaxed">{t('why.plannerDesc')}</p>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <h3 className="text-2xl font-bold">Hidden China Atlas</h3>
-              <p className="text-gray-400 mt-2">{t('hero.title')}</p>
+      <footer className="bg-primary text-white pb-12 pt-24 px-6 md:px-16 border-t border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-24">
+            <div>
+              <h3 className="text-3xl font-serif mb-4">Hidden China Atlas</h3>
+              <p className="text-white/50 font-light max-w-sm">{t('hero.title')}</p>
             </div>
-            <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.about')}</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.destinations')}</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.contact')}</a>
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-12">
+              <a href="#" className="text-sm tracking-widest uppercase hover:text-accent transition-colors">{t('footer.about')}</a>
+              <a href="#" className="text-sm tracking-widest uppercase hover:text-accent transition-colors">{t('footer.destinations')}</a>
+              <a href="#" className="text-sm tracking-widest uppercase hover:text-accent transition-colors">{t('footer.contact')}</a>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="flex flex-col sm:flex-row justify-between items-center text-xs text-white/40 pt-8 border-t border-white/10">
             <p>&copy; {new Date().getFullYear()} Hidden China Atlas. {t('footer.copyright')}</p>
+            <div className="flex gap-4 mt-4 sm:mt-0">
+              <span>Privacy Policy</span>
+              <span>Terms of Service</span>
+            </div>
           </div>
         </div>
       </footer>
