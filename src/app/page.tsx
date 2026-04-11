@@ -38,25 +38,25 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Language Switcher */}
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-6 right-6 z-50 fade-in">
         <LanguageSwitcher />
       </div>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-green-50 z-0"></div>
+      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=beautiful%20chinese%20landscape%20mountains%20and%20rivers%20scenic%20view&image_size=landscape_16_9')" }}>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60 z-0"></div>
         <div className="container mx-auto px-4 z-10 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 fade-in" style={{ animationDelay: '0.1s' }}>
             {t('hero.title')}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-100 mb-12 max-w-3xl mx-auto fade-in" style={{ animationDelay: '0.3s' }}>
             {t('hero.subtitle')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center fade-in" style={{ animationDelay: '0.5s' }}>
+            <button className="btn-primary">
               {t('hero.exploreMap')}
             </button>
-            <button className="bg-white hover:bg-gray-50 text-primary border border-primary px-8 py-3 rounded-lg font-medium transition-all transform hover:scale-105">
+            <button className="btn-secondary">
               {t('hero.planTrip')}
             </button>
           </div>
@@ -64,28 +64,32 @@ export default function Home() {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('map.title')}</h2>
-          <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
+      <section className="section bg-white">
+        <div className="container">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 fade-in-up">{t('map.title')}</h2>
+          <div className="bg-gray-50 rounded-2xl p-8 shadow-lg fade-in" style={{ animationDelay: '0.2s' }}>
             <ChinaMap />
           </div>
         </div>
       </section>
 
       {/* Hidden Picks Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('hiddenPicks.title')}</h2>
-          <FilterComponent onFilterChange={handleFilterChange} />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="section gradient-bg">
+        <div className="container">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 fade-in-up">{t('hiddenPicks.title')}</h2>
+          <div className="fade-in" style={{ animationDelay: '0.2s' }}>
+            <FilterComponent onFilterChange={handleFilterChange} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
             {filteredDestinations.length > 0 ? (
-              filteredDestinations.map((destination) => (
-                <DestinationCard key={destination.id} destination={destination} />
+              filteredDestinations.map((destination, index) => (
+                <div key={destination.id} className="fade-in-up" style={{ animationDelay: `${0.1 * index}s` }}>
+                  <DestinationCard destination={destination} />
+                </div>
               ))
             ) : (
-              <div className="col-span-full text-center py-12">
-                <p className="text-gray-500">No destinations match your filters. Please try adjusting your filter criteria.</p>
+              <div className="col-span-full text-center py-16 fade-in">
+                <p className="text-gray-500 text-lg">No destinations match your filters. Please try adjusting your filter criteria.</p>
               </div>
             )}
           </div>
@@ -93,37 +97,39 @@ export default function Home() {
       </section>
 
       {/* Smart Trip Planner Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('tripPlanner.title')}</h2>
-          <SmartTripPlanner />
+      <section className="section bg-white">
+        <div className="container">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 fade-in-up">{t('tripPlanner.title')}</h2>
+          <div className="max-w-3xl mx-auto fade-in">
+            <SmartTripPlanner />
+          </div>
         </div>
       </section>
 
       {/* Why Hidden China Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{t('why.title')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-primary text-2xl">🔍</span>
+      <section className="section bg-gray-50">
+        <div className="container">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 fade-in-up">{t('why.title')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="text-center p-8 bg-white rounded-2xl shadow-sm hover-lift fade-in-up" style={{ animationDelay: '0.1s' }}>
+              <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-primary text-3xl">🔍</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{t('why.discover')}</h3>
+              <h3 className="text-2xl font-semibold mb-4">{t('why.discover')}</h3>
               <p className="text-gray-600">{t('why.discoverDesc')}</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-secondary text-2xl">🗺️</span>
+            <div className="text-center p-8 bg-white rounded-2xl shadow-sm hover-lift fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-secondary text-3xl">🗺️</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{t('why.map')}</h3>
+              <h3 className="text-2xl font-semibold mb-4">{t('why.map')}</h3>
               <p className="text-gray-600">{t('why.mapDesc')}</p>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-purple-600 text-2xl">🤖</span>
+            <div className="text-center p-8 bg-white rounded-2xl shadow-sm hover-lift fade-in-up" style={{ animationDelay: '0.5s' }}>
+              <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-accent text-3xl">🤖</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">{t('why.planner')}</h3>
+              <h3 className="text-2xl font-semibold mb-4">{t('why.planner')}</h3>
               <p className="text-gray-600">{t('why.plannerDesc')}</p>
             </div>
           </div>
@@ -131,20 +137,20 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <h3 className="text-2xl font-bold">Hidden China Atlas</h3>
-              <p className="text-gray-400 mt-2">{t('hero.title')}</p>
+      <footer className="bg-dark text-white py-16">
+        <div className="container">
+          <div className="flex flex-col md:flex-row justify-between items-center mb-12">
+            <div className="mb-8 md:mb-0">
+              <h3 className="text-3xl font-bold mb-2">Hidden China Atlas</h3>
+              <p className="text-gray-400">{t('hero.title')}</p>
             </div>
-            <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.about')}</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.destinations')}</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">{t('footer.contact')}</a>
+            <div className="flex space-x-8">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">{t('footer.about')}</a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">{t('footer.destinations')}</a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">{t('footer.contact')}</a>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
             <p>&copy; {new Date().getFullYear()} Hidden China Atlas. {t('footer.copyright')}</p>
           </div>
         </div>
