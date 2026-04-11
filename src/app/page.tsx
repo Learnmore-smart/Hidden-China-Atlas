@@ -85,11 +85,17 @@ export default function Home() {
             {t('hero.subtitle')}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-6">
-            <button className="group flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-neutral transition-colors duration-300">
+            <button 
+              onClick={() => document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-neutral transition-colors duration-300"
+            >
               {t('hero.exploreMap')}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button className="group flex items-center justify-center gap-3 border border-white/30 text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-white/10 backdrop-blur-sm transition-colors duration-300">
+            <button 
+              onClick={() => document.getElementById('planner-section')?.scrollIntoView({ behavior: 'smooth' })}
+              className="group flex items-center justify-center gap-3 border border-white/30 text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-white/10 backdrop-blur-sm transition-colors duration-300"
+            >
               {t('hero.planTrip')}
             </button>
           </motion.div>
@@ -97,7 +103,7 @@ export default function Home() {
       </section>
 
       {/* Map Section */}
-      <section className="py-32 px-6 md:px-16 bg-neutral">
+      <section id="map-section" className="py-32 px-6 md:px-16 bg-neutral">
         <motion.div 
           initial="hidden"
           whileInView="visible"
@@ -111,8 +117,10 @@ export default function Home() {
               {t('why.mapDesc')}
             </p>
           </motion.div>
-          <motion.div variants={fadeUp} className="w-full aspect-[4/3] md:aspect-[21/9] bg-secondary rounded-none shadow-2xl shadow-black/5 overflow-hidden">
-            <ChinaMap />
+          <motion.div variants={fadeUp} className="w-full bg-secondary rounded-none shadow-2xl shadow-black/5 overflow-hidden relative border border-primary/5">
+            <div className="w-full py-8">
+              <ChinaMap />
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -156,7 +164,7 @@ export default function Home() {
       </section>
 
       {/* Smart Trip Planner Section */}
-      <section className="py-32 px-6 md:px-16 bg-neutral border-t border-primary/5">
+      <section id="planner-section" className="py-32 px-6 md:px-16 bg-neutral border-t border-primary/5">
         <motion.div 
           initial="hidden"
           whileInView="visible"
