@@ -63,7 +63,7 @@ export default function Home() {
       <section className="relative h-screen flex flex-col justify-end pb-32 px-6 md:px-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=epic%20landscape%20photography%20of%20guilin%20karst%20mountains%20misty%20morning%20serene%20premium%20travel%20editorial%20shot&image_size=landscape_16_9"
+            src="/images/hero.svg"
             alt="Hero Landscape"
             fill
             className="object-cover scale-105"
@@ -117,10 +117,8 @@ export default function Home() {
               {t('why.mapDesc')}
             </p>
           </motion.div>
-          <motion.div variants={fadeUp} className="w-full bg-secondary rounded-none shadow-2xl shadow-black/5 overflow-hidden relative border border-primary/5">
-            <div className="w-full py-8">
-              <ChinaMap />
-            </div>
+          <motion.div variants={fadeUp} className="w-full rounded-none shadow-2xl shadow-black/5 overflow-hidden relative border border-primary/5">
+            <ChinaMap />
           </motion.div>
         </motion.div>
       </section>

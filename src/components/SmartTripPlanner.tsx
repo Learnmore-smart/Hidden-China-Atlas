@@ -210,7 +210,7 @@ const SmartTripPlanner: React.FC = () => {
                   <div className="flex flex-col md:flex-row gap-12 items-center">
                     <div className="w-full md:w-1/2 relative aspect-[4/3] overflow-hidden bg-neutral-dark/5">
                       <Image 
-                        src={`https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=${encodeURIComponent(`epic travel photography of ${plan.destination.name} premium editorial shot serene beautiful`)}&image_size=landscape_4_3`} 
+                        src={plan.destination.imageUrl} 
                         alt={plan.destination.name}
                         fill
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
