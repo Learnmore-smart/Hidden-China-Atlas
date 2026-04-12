@@ -8,11 +8,11 @@ interface DestinationCardProps {
 }
 
 const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
-  const { language } = useTranslation();
+  const { t } = useTranslation();
   
   // Try to get translated destination data if available, fallback to default
-  const destName = language === 'zh' ? destination.chineseName : destination.name;
-  const destProvince = destination.province;
+  const destName = t(`destinations.${destination.id}.name`);
+  const destProvince = t(`destinations.${destination.id}.province`);
   
   // Use destination image from local public folder
   const imageUrl = destination.imageUrl;
@@ -33,16 +33,16 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
         <div className="flex justify-between items-end gap-4">
           <h3 className="text-2xl font-serif leading-none">{destName}</h3>
           <span className="text-xs uppercase tracking-widest text-neutral-muted font-medium shrink-0">
-            {destination.province}
+            {destProvince}
           </span>
         </div>
         
         <p className="text-neutral-muted font-light leading-relaxed line-clamp-2">
-          {destination.description}
+          {t(`destinations.${destination.id}.description`)}
         </p>
         
         <div className="flex flex-wrap gap-2 mt-2">
-          {destination.vibeTags.map((tag, index) => (
+          {(t(`destinations.${destination.id}.vibeTags`) as unknown as string[]).map((tag, index) => (
             <span key={index} className="text-xs uppercase tracking-wider text-primary/70 border border-primary/10 px-3 py-1">
               {tag}
             </span>
@@ -50,9 +50,9 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
         </div>
         
         <div className="flex items-center gap-4 mt-4 text-xs tracking-widest uppercase text-neutral-muted pt-4 border-t border-primary/10">
-          <span>{destination.bestSeason}</span>
+          <span>{t(`destinations.${destination.id}.bestSeason`)}</span>
           <span className="w-1 h-1 rounded-full bg-accent/50" />
-          <span>{destination.idealTripLength}</span>
+          <span>{t(`destinations.${destination.id}.idealTripLength`)}</span>
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Low to Medium',
     howToGetThere: 'Take a high-speed train from Fuzhou to Pingtan, then local transport to the island',
     description: 'A coastal gem with crystal-clear waters, white sandy beaches, and traditional stone houses. Perfect for a relaxing getaway away from the crowds.',
-    imageUrl: '/images/pingtan.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=pingtan%20island%20beach%20stone%20houses%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'gannan',
@@ -43,7 +43,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Low',
     howToGetThere: 'Fly to Lanzhou, then take a bus or drive to Xiahe',
     description: 'Scenic grasslands, Tibetan monasteries, and nomadic culture in northwestern China. A hidden paradise for nature and culture lovers.',
-    imageUrl: '/images/gannan.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=gannan%20tibetan%20grassland%20monastery%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'hongcun',
@@ -58,7 +58,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Medium to High',
     howToGetThere: 'Take a bus from Huangshan City to Hongcun',
     description: 'An ancient village with traditional Hui-style architecture, narrow stone lanes, and a unique water system. Known as the "Village in Chinese Painting".',
-    imageUrl: '/images/hongcun.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=hongcun%20ancient%20village%20water%20reflection%20huizhou%20architecture%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'zhoushan',
@@ -73,7 +73,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Medium',
     howToGetThere: 'Take a ferry from Ningbo or Shanghai to Zhoushan',
     description: 'A beautiful archipelago with clear waters, sandy beaches, and fresh seafood. Perfect for a coastal escape.',
-    imageUrl: '/images/zhoushan.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=zhoushan%20islands%20fishing%20village%20beach%20sea%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'lijiang',
@@ -88,7 +88,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'High',
     howToGetThere: 'Fly to Lijiang Airport, then take a taxi to the ancient town',
     description: 'A well-preserved ancient town with Naxi ethnic culture, traditional architecture, and scenic surroundings. A popular but still charming destination.',
-    imageUrl: '/images/lijiang.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=lijiang%20ancient%20town%20naxi%20architecture%20mountain%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'hulunbuir',
@@ -103,7 +103,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Low to Medium',
     howToGetThere: 'Fly to Hailar Airport, then rent a car or join a tour',
     description: 'Vast grasslands with Mongolian nomadic culture, yurts, and stunning natural scenery. A perfect place to experience traditional Mongolian life.',
-    imageUrl: '/images/hulunbuir.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=hulunbuir%20grassland%20mongolian%20yurts%20nature%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'xidi',
@@ -118,7 +118,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Medium',
     howToGetThere: 'Take a bus from Huangshan City to Xidi',
     description: 'A well-preserved ancient village with traditional Hui-style architecture, intricate wood carvings, and a peaceful atmosphere.',
-    imageUrl: '/images/xidi.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=xidi%20ancient%20village%20huizhou%20architecture%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'sansha',
@@ -133,7 +133,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Low',
     howToGetThere: 'Take a bus from Xiamen to Dongshan Island, then local transport to Sansha',
     description: 'A traditional fishing town with unique coastal architecture, fresh seafood, and a relaxed atmosphere. Perfect for a quiet coastal getaway.',
-    imageUrl: '/images/sansha.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=sansha%20town%20fujian%20traditional%20coastal%20fishing%20village%20sea%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'langmusi',
@@ -148,7 +148,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Low',
     howToGetThere: 'Take a bus from Xiahe or Chengdu to Langmusi',
     description: 'A small town on the border of Gansu and Sichuan with Tibetan monasteries, stunning natural scenery, and a peaceful atmosphere.',
-    imageUrl: '/images/langmusi.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=langmusi%20tibetan%20monastery%20town%20nature%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'fenghuang',
@@ -163,7 +163,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Medium to High',
     howToGetThere: 'Take a train to Jishou, then a bus to Fenghuang',
     description: 'A well-preserved ancient town with unique Miao and Tujia ethnic culture, traditional architecture, and scenic river views.',
-    imageUrl: '/images/fenghuang.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=fenghuang%20ancient%20town%20miao%20architecture%20river%20landscape%20photography%20night%20view%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'yueyang',
@@ -178,7 +178,7 @@ export const destinations: Destination[] = [
     crowdLevel: 'Medium',
     howToGetThere: 'Take a train to Yueyang, then local transport to Yueyang Tower',
     description: 'One of the Four Great Towers of China with stunning views of Dongting Lake and rich historical significance.',
-    imageUrl: '/images/yueyang.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=yueyang%20tower%20dongting%20lake%20ancient%20chinese%20architecture%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   },
   {
     id: 'wuyuan',
@@ -193,6 +193,6 @@ export const destinations: Destination[] = [
     crowdLevel: 'Medium to High during peak seasons',
     howToGetThere: 'Take a train to Jingdezhen, then a bus to Wuyuan',
     description: 'Beautiful countryside with ancient villages, rape flower fields, and traditional Huizhou architecture. A perfect place to experience rural China.',
-    imageUrl: '/images/wuyuan.svg'
+    imageUrl: 'https://coreva-normal.trae.ai/api/ide/v1/text_to_image?prompt=wuyuan%20rural%20china%20ancient%20village%20huizhou%20architecture%20rape%20flower%20fields%20landscape%20photography%20high%20quality&image_size=landscape_16_9'
   }
 ];
