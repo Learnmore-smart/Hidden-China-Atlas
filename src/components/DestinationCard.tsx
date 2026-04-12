@@ -25,6 +25,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
           alt={destination.name}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          unoptimized
         />
         <div className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10" />
       </div>

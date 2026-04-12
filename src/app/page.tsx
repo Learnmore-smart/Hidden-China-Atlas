@@ -68,6 +68,7 @@ export default function Home() {
             fill
             className="object-cover scale-105"
             priority
+            unoptimized
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/80 z-0"></div>
         </div>
