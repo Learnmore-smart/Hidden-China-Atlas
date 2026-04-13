@@ -214,6 +214,7 @@ const SmartTripPlanner: React.FC = () => {
                         alt={plan.destination.name}
                         fill
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        unoptimized
                       />
                     </div>
                     <div className="w-full md:w-1/2 flex flex-col gap-6">

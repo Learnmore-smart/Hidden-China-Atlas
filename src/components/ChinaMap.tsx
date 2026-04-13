@@ -228,6 +228,7 @@ const ChinaMap: React.FC = () => {
                 alt={selectedDest.name}
                 fill
                 className="object-cover"
+                unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-dark to-transparent"></div>
               <button 

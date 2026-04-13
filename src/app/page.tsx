@@ -63,11 +63,12 @@ export default function Home() {
       <section className="relative h-screen flex flex-col justify-end pb-32 px-6 md:px-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/images/hero.svg"
+            src="/images/hero.jpg"
             alt="Hero Landscape"
             fill
             className="object-cover scale-105"
             priority
+            unoptimized
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/80 z-0"></div>
         </div>
