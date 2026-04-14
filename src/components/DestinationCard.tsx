@@ -14,9 +14,8 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destination }) => {
   const destName = t(`destinations.${destination.id}.name`);
   const destProvince = t(`destinations.${destination.id}.province`);
 
-  // Use destination image from local public folder, prepend basePath for subpath safety
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-  const imageUrl = `${basePath}${destination.imageUrl}`;
+  // Use destination image from local public folder
+  const imageUrl = destination.imageUrl;
 
   return (
     <div className="group cursor-pointer flex flex-col gap-6">

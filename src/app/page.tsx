@@ -63,7 +63,7 @@ export default function Home() {
       <section className="relative h-screen flex flex-col justify-end pb-32 px-6 md:px-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/hero.jpg`}
+            src="/images/hero.jpg"
             alt="Hero Landscape"
             fill
             className="object-cover scale-105"
