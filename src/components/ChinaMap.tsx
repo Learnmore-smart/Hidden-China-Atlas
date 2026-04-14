@@ -45,16 +45,16 @@ const ChinaMap: React.FC = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const selectedDest = useMemo(() => 
+  const selectedDest = useMemo(() =>
     destinations.find(d => d.id === selectedId) || null,
   [selectedId]);
 
   return (
     <div className="relative w-full rounded-none overflow-hidden bg-primary text-secondary border border-white/10 shadow-2xl flex flex-col md:flex-row h-[800px] font-sans">
-      
+
       {/* Map Area */}
       <div className={`relative flex-grow h-full transition-all duration-700 ease-[0.16,1,0.3,1] ${selectedId ? 'md:w-2/3' : 'w-full'}`}>
-        
+
         {/* Abstract Topographic/Grid Background */}
         <div className="absolute inset-0 pointer-events-none opacity-20">
           <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -80,7 +80,7 @@ const ChinaMap: React.FC = () => {
             const p1 = coordinateMap[id1];
             const p2 = coordinateMap[id2];
             if (!p1 || !p2) return null;
-            
+
             const isHovered = hoveredId === id1 || hoveredId === id2;
             const isSelected = selectedId === id1 || selectedId === id2;
             const isActive = isHovered || isSelected;
@@ -120,14 +120,14 @@ const ChinaMap: React.FC = () => {
                     stroke="#b45309"
                     strokeWidth="1"
                     initial={{ r: 10, opacity: 0.8 }}
-                    animate={{ 
-                      r: 200 * ring, 
+                    animate={{
+                      r: 200 * ring,
                       opacity: 0,
-                      strokeWidth: 0 
+                      strokeWidth: 0
                     }}
-                    transition={{ 
-                      duration: 4, 
-                      repeat: Infinity, 
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
                       delay: ring * 1.2,
                       ease: "easeOut"
                     }}
@@ -141,12 +141,12 @@ const ChinaMap: React.FC = () => {
           {destinations.map((dest, i) => {
             const pos = coordinateMap[dest.id];
             if (!pos) return null;
-            
+
             const isSelected = selectedId === dest.id;
             const isHovered = hoveredId === dest.id;
 
             return (
-              <g 
+              <g
                 key={dest.id}
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredId(dest.id)}
@@ -158,7 +158,7 @@ const ChinaMap: React.FC = () => {
               >
                 {/* Hit area */}
                 <circle cx={pos.x} cy={pos.y} r="25" fill="transparent" />
-                
+
                 {/* Outer halo */}
                 <motion.circle
                   cx={pos.x}
@@ -169,7 +169,7 @@ const ChinaMap: React.FC = () => {
                   strokeWidth="1"
                   className="transition-all duration-300"
                 />
-                
+
                 {/* Core dot */}
                 <motion.circle
                   cx={pos.x}
@@ -201,7 +201,7 @@ const ChinaMap: React.FC = () => {
 
         {/* Overlay Title */}
         <div className="absolute top-10 left-10 pointer-events-none mix-blend-difference">
-          <motion.h3 
+          <motion.h3
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-white text-3xl md:text-5xl font-serif tracking-wide"
@@ -223,15 +223,15 @@ const ChinaMap: React.FC = () => {
           >
             {/* Image Hero */}
             <div className="relative h-64 md:h-1/2 w-full flex-shrink-0">
-              <Image 
-                src={selectedDest.imageUrl} 
+              <Image
+                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${selectedDest.imageUrl}`}
                 alt={selectedDest.name}
                 fill
                 className="object-cover"
                 unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-neutral-dark to-transparent"></div>
-              <button 
+              <button
                 onClick={() => setSelectedId(null)}
                 className="absolute top-6 right-6 text-white/50 hover:text-white uppercase tracking-widest text-xs transition-colors"
               >
@@ -251,10 +251,10 @@ const ChinaMap: React.FC = () => {
                   <span className="w-8 h-px bg-white/20"></span>
                   <span className="text-white/40 text-xs">{t(`destinations.${selectedDest.id}.idealTripLength`)}</span>
                 </div>
-                
+
                 <h4 className="text-3xl md:text-4xl font-serif text-white mb-2">{t(`destinations.${selectedDest.id}.name`)}</h4>
                 <p className="text-white/40 font-serif italic mb-8">{selectedDest.chineseName} — {t(`destinations.${selectedDest.id}.tagline`)}</p>
-                
+
                 <p className="text-white/80 font-light leading-relaxed mb-8">
                   {t(`destinations.${selectedDest.id}.description`)}
                 </p>

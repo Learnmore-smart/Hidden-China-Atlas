@@ -34,7 +34,7 @@ const SmartTripPlanner: React.FC = () => {
 
   const generateTripPlans = () => {
     setIsLoading(true);
-    
+
     // 模拟 API 调用延迟
     setTimeout(() => {
       const { numberOfDays, interests, avoidCrowds } = formData;
@@ -46,15 +46,15 @@ const SmartTripPlanner: React.FC = () => {
 
       // 避开人群过滤
       if (avoidCrowds) {
-        filteredDestinations = filteredDestinations.filter(dest => 
+        filteredDestinations = filteredDestinations.filter(dest =>
           dest.crowdLevel === 'Low' || dest.crowdLevel === 'Low to Medium'
         );
       }
 
       // 兴趣标签匹配
       if (interestTags.length > 0) {
-        filteredDestinations = filteredDestinations.filter(dest => 
-          interestTags.some(tag => 
+        filteredDestinations = filteredDestinations.filter(dest =>
+          interestTags.some(tag =>
             dest.vibeTags.some(vibeTag => vibeTag.includes(tag)
           )
         )
@@ -129,7 +129,7 @@ const SmartTripPlanner: React.FC = () => {
 
   return (
     <div className="w-full">
-      <form 
+      <form
         className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 text-left"
         onSubmit={(e) => {
           e.preventDefault();
@@ -138,47 +138,47 @@ const SmartTripPlanner: React.FC = () => {
       >
         <div className="flex flex-col gap-2">
           <label className="text-xs uppercase tracking-widest text-neutral-muted">{t('tripPlanner.departureCity')}</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="departureCity"
             value={formData.departureCity}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-primary/20 py-3 text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-primary/20" 
-            placeholder="e.g., Beijing" 
+            className="w-full bg-transparent border-b border-primary/20 py-3 text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-primary/20"
+            placeholder="e.g., Beijing"
           />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-xs uppercase tracking-widest text-neutral-muted">{t('tripPlanner.numberOfDays')}</label>
-          <input 
-            type="number" 
+          <input
+            type="number"
             name="numberOfDays"
             value={formData.numberOfDays}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-primary/20 py-3 text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-primary/20" 
-            placeholder="e.g., 5" 
+            className="w-full bg-transparent border-b border-primary/20 py-3 text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-primary/20"
+            placeholder="e.g., 5"
             min="1"
           />
         </div>
         <div className="flex flex-col gap-2">
           <label className="text-xs uppercase tracking-widest text-neutral-muted">{t('tripPlanner.interests')}</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="interests"
             value={formData.interests}
             onChange={handleChange}
-            className="w-full bg-transparent border-b border-primary/20 py-3 text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-primary/20" 
-            placeholder="e.g., nature, culture, food" 
+            className="w-full bg-transparent border-b border-primary/20 py-3 text-lg focus:outline-none focus:border-primary transition-colors placeholder:text-primary/20"
+            placeholder="e.g., nature, culture, food"
           />
         </div>
         <div className="flex items-center pt-6">
           <label className="flex items-center cursor-pointer group">
             <div className="relative flex items-center justify-center w-5 h-5 border border-primary/20 rounded-sm mr-3 group-hover:border-primary transition-colors">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 name="avoidCrowds"
                 checked={formData.avoidCrowds}
                 onChange={handleChange}
-                className="absolute opacity-0 cursor-pointer w-full h-full" 
+                className="absolute opacity-0 cursor-pointer w-full h-full"
               />
               {formData.avoidCrowds && (
                 <div className="w-2.5 h-2.5 bg-primary rounded-sm" />
@@ -187,10 +187,10 @@ const SmartTripPlanner: React.FC = () => {
             <span className="text-sm uppercase tracking-widest text-primary">{t('tripPlanner.avoidCrowds')}</span>
           </label>
         </div>
-        
+
         <div className="col-span-full mt-8">
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="w-full bg-primary text-white py-5 text-sm tracking-widest uppercase font-medium hover:bg-primary/90 transition-colors"
             disabled={isLoading}
           >
@@ -209,8 +209,8 @@ const SmartTripPlanner: React.FC = () => {
                 <div key={index} className="group">
                   <div className="flex flex-col md:flex-row gap-12 items-center">
                     <div className="w-full md:w-1/2 relative aspect-[4/3] overflow-hidden bg-neutral-dark/5">
-                      <Image 
-                        src={plan.destination.imageUrl} 
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}${plan.destination.imageUrl}`}
                         alt={plan.destination.name}
                         fill
                         className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -223,9 +223,9 @@ const SmartTripPlanner: React.FC = () => {
                         <h4 className="text-4xl font-serif leading-tight">{plan.destination.name}</h4>
                         <p className="text-sm uppercase tracking-widest text-neutral-muted">{plan.destination.province}</p>
                       </div>
-                      
+
                       <p className="text-primary/80 font-light leading-relaxed">{plan.reason}</p>
-                      
+
                       <div className="flex gap-8 py-6 border-y border-primary/10">
                         <div className="flex flex-col gap-1">
                           <span className="text-xs uppercase tracking-widest text-neutral-muted">Season</span>
@@ -236,7 +236,7 @@ const SmartTripPlanner: React.FC = () => {
                           <span className="font-serif text-lg">{plan.recommendedDuration}</span>
                         </div>
                       </div>
-                      
+
                       <div>
                         <h5 className="text-xs uppercase tracking-widest text-neutral-muted mb-4">Suggested Rhythm</h5>
                         <ul className="space-y-3">

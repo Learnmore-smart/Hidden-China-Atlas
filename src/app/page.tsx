@@ -62,8 +62,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col justify-end pb-32 px-6 md:px-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/images/hero.jpg"
+          <Image
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/hero.jpg`}
             alt="Hero Landscape"
             fill
             className="object-cover scale-105"
@@ -72,8 +72,8 @@ export default function Home() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/80 z-0"></div>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           className="relative z-10 max-w-4xl"
           initial="hidden"
           animate="visible"
@@ -86,14 +86,14 @@ export default function Home() {
             {t('hero.subtitle')}
           </motion.p>
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-6">
-            <button 
+            <button
               onClick={() => document.getElementById('map-section')?.scrollIntoView({ behavior: 'smooth' })}
               className="group flex items-center justify-center gap-3 bg-white text-primary px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-neutral transition-colors duration-300"
             >
               {t('hero.exploreMap')}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
-            <button 
+            <button
               onClick={() => document.getElementById('planner-section')?.scrollIntoView({ behavior: 'smooth' })}
               className="group flex items-center justify-center gap-3 border border-white/30 text-white px-8 py-4 text-sm tracking-widest uppercase font-medium hover:bg-white/10 backdrop-blur-sm transition-colors duration-300"
             >
@@ -105,7 +105,7 @@ export default function Home() {
 
       {/* Map Section */}
       <section id="map-section" className="py-32 px-6 md:px-16 bg-neutral">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -127,7 +127,7 @@ export default function Home() {
       {/* Hidden Picks Section */}
       <section className="py-32 px-6 md:px-16 bg-secondary">
         <div className="max-w-7xl mx-auto">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -139,8 +139,8 @@ export default function Home() {
               <FilterComponent onFilterChange={handleFilterChange} />
             </motion.div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
             initial="hidden"
             whileInView="visible"
@@ -164,7 +164,7 @@ export default function Home() {
 
       {/* Smart Trip Planner Section */}
       <section id="planner-section" className="py-32 px-6 md:px-16 bg-neutral border-t border-primary/5">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -180,7 +180,7 @@ export default function Home() {
 
       {/* Why Hidden China Section */}
       <section className="py-32 px-6 md:px-16 bg-primary text-white">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
@@ -188,7 +188,7 @@ export default function Home() {
           className="max-w-7xl mx-auto"
         >
           <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-serif mb-20">{t('why.title')}</motion.h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 border-t border-white/20 pt-16">
             <motion.div variants={fadeUp} className="flex flex-col gap-6">
               <Compass className="w-8 h-8 text-accent" strokeWidth={1.5} />
