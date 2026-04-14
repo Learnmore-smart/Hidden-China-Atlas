@@ -4,7 +4,7 @@ const nextConfig = {
   basePath: '/hidden-china-atlas',
   assetPrefix: '/hidden-china-atlas',
   images: {
-    unoptimized: true,
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: 'https',
