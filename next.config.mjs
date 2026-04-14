@@ -2,6 +2,7 @@
 
 const nextConfig = {
   basePath: '/hidden-china-atlas',
+  assetPrefix: '/hidden-china-atlas',
   images: {
     remotePatterns: [
       {
