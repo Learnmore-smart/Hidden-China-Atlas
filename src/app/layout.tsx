@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title: 'Hidden China Atlas - Curated Journeys',
     description: 'Journey beyond the ordinary. Discover destinations most travelers never see.',
     type: 'website',
-    url: 'https://hiddenchinaatlas.com',
+    url: 'https://rateministere.com',
   },
 }
 
